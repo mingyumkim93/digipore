@@ -1,21 +1,22 @@
 import React from 'react';
 import auth from './auth';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const Requests = ({request, props, currentId}) =><tr>
-    <td>{request.id}</td>
+    
+    <td><Link to={`request/${request.id}`}>{request.id}</Link></td>
     <td>{request.requesting_user_id}</td>
-    <td>{request.explanation}</td>
+    <td>{request.title}</td>
     {/* todo : think about how to implement different bahavior for modigying...*/}
-    {currentId == request.requesting_user_id && <td><button onClick={()=>props.history.push("/accept")}>Modify</button></td>}
-    {currentId != request.requesting_user_id && <td><button onClick={()=>props.history.push("/accept")}>Accept</button></td>}
+    {request.isAccepted && <td>Under process</td>}
+    {!request.isAccepted && <td>Wating for accept</td>}
     {/* Find better way.. */}
 </tr>
 
 
 export class Main extends React.Component {
     
-
     constructor(props) {
         super(props);
         this.state = {
@@ -23,11 +24,19 @@ export class Main extends React.Component {
         }
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:9000/api/requests').then(res=>{
+    getRequestsFromDB(){
+        axios.get('/api/requests').then(res=>{
             const requests = res.data;
             this.setState({requests});
-        })
+        });
+    }
+
+    componentDidMount(){
+       this.getRequestsFromDB();
+    }
+
+    componentDidUpdate(){
+        this.getRequestsFromDB();
     }
 
     render() {
@@ -35,7 +44,7 @@ export class Main extends React.Component {
         
         let rows = requests.map(request => <Requests request={request} props={this.props} key={request.id} currentId={auth.currentId}/>)
         return <div>
-            <button onClick={()=>this.props.history.push("/request")}> New Request </button>
+            <button onClick={()=>this.props.history.push("/createrequest")}> New Request </button>
             <button onClick={()=>this.props.history.push("/mypage")}> My Page </button>
             <input type="text" placeholder="Filter" />
             <table>
@@ -43,7 +52,7 @@ export class Main extends React.Component {
                     <tr>
                         <td>Number</td>
                         <td>Requesting User</td>
-                        <td>Explanation</td>
+                        <td>Title</td>
                         <td>State</td>
                     </tr>
                 </thead>

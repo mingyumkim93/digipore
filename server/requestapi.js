@@ -5,14 +5,14 @@ module.exports=function(app,db){
         dao.getAll(function({error,data}){
              resp.json(data);
         })
-    })
+    });
 
     app.get("/api/requests/:id",function(req,resp){
         let id=Number(req.params.id);
         dao.get(id,function({error,data}){
             resp.json(data);
         })
-    })
+    });
 
     app.get("/api/requests/:id/users",function(req,resp){
         let id=Number(req.params.id);
@@ -26,5 +26,6 @@ module.exports=function(app,db){
         dao.insert(req.body,function({error,data}){
             resp.json(data);
         })
-    })
+    });
+
 }

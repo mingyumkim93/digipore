@@ -3,10 +3,12 @@ module.exports=function(db){
         //first do get and post first
         getAll(cb){
             db.query("SELECT * FROM request",cb);
+                    //sql, cb
         },
         get(id,cb){
             db.paramQuery("SELECT * FROM request where id=?",[id],
                         function({error,data}){
+                        //sql, params, cb
                 if (error) cb({error});
                 else if (data.length) cb({data:data[0]});
                 else cb({data:{}});                
@@ -21,9 +23,9 @@ module.exports=function(db){
                 else this.get(data.insertId,cb);
             })
         },
-        update(author,cb){
-            // Pass the object that was stored to the database to the callback
-        },
+
+        update(){}
+
         delete(id,cb){}
     }
 }
