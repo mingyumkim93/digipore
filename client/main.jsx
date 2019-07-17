@@ -9,8 +9,8 @@ const Requests = ({request, props, currentId}) =><tr>
     <td>{request.requesting_user_id}</td>
     <td>{request.title}</td>
     {/* todo : think about how to implement different bahavior for modigying...*/}
-    {request.isAccepted && <td>Under process</td>}
-    {!request.isAccepted && <td>Wating for accept</td>}
+   
+    <td>{request.isAccepted? 'Under processing':'Waiting for accept'}</td>
     {/* Find better way.. */}
 </tr>
 

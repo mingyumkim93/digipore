@@ -28,4 +28,11 @@ module.exports=function(app,db){
         })
     });
 
+    app.put("/api/requests/:id",function(req,resp){
+        let id=Number(req.params.id);
+        dao.update(id,function({error,data}){
+            resp.json(data);
+        })
+    })
+
 }

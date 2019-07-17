@@ -31,10 +31,14 @@ export class RequestDetail extends React.Component {
 
 
     render() {
-        let { request } = this.state.request;
+        let requestId = this.props.match.params.id;
         return <div> <h2>{this.state.request.explanation}</h2>
         <button onClick={()=>{
-            this.props.history.push("/main")                    
+            axios.put(`/api/requests/${requestId}`).then(res=>{
+                const request = res.data;
+                this.setState({request});
+            });
+            this.props.history.push("/main");                    
                                 }}>Accept</button>
         </div>
     }

@@ -24,7 +24,11 @@ module.exports=function(db){
             })
         },
 
-        update(){}
+        update(id,cb){
+            db.paramQuery("UPDATE request SET isAccepted=true where id=?",[id],function({error,data}){
+                cb(data);
+            });
+        },
 
         delete(id,cb){}
     }
