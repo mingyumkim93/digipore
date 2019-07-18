@@ -24,8 +24,8 @@ export class Main extends React.Component {
         },this._isMounted = false;
     }
 
-    getRequestsFromDB(){
-        axios.get('/api/requests').then(res=>{
+     getRequestsFromDB(){
+         axios.get('/api/requests').then(res=>{
             const requests = res.data;
             this._isMounted && this.setState({requests});
         });
@@ -33,20 +33,16 @@ export class Main extends React.Component {
 
     componentDidMount(){
         this._isMounted = true;
-       this.getRequestsFromDB();
+        this.getRequestsFromDB();
+        this.forceUpdate();
     }
 
-    componentDidUpdate(){
-        this._isMounted && this.getRequestsFromDB();
-    }
-    
     componentWillUnmount(){
         this._isMounted = false;
     }
 
     render() {
         let {requests} = this.state;
-        
         let rows = requests.map(request => <Requests request={request} props={this.props} key={request.id} currentId={auth.currentId}/>)
         return <div>
             <button onClick={()=>this.props.history.push("/createrequest")}> New Request </button>
