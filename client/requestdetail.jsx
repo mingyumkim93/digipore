@@ -14,21 +14,25 @@ export class RequestDetail extends React.Component {
                 requesting_user_id: "",
                 providing_user_id: ""
             }
-        };
+        },this._isMounted=false;
     }
 
     getRequestFromDB(requestId) {
         axios.get(`/api/requests/${requestId}`).then(res => {
             const request = res.data;
-            this.setState({ request });
+            this._isMounted && this.setState({ request });
         });
     }
 
     componentDidMount() {
+        this._isMounted = true;
         let requestId = this.props.match.params.id;
         if (requestId) this.getRequestFromDB(requestId);
     }
 
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
 
     render() {
         let requestId = this.props.match.params.id;
@@ -36,7 +40,7 @@ export class RequestDetail extends React.Component {
         <button onClick={()=>{
             axios.put(`/api/requests/${requestId}`).then(res=>{
                 const request = res.data;
-                this.setState({request});
+                this._isMounted && this.setState({request});
             });
             this.props.history.push("/main");                    
                                 }}>Accept</button>

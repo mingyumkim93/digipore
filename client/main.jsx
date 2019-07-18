@@ -21,22 +21,27 @@ export class Main extends React.Component {
         super(props);
         this.state = {
           requests:[]
-        }
+        },this._isMounted = false;
     }
 
     getRequestsFromDB(){
         axios.get('/api/requests').then(res=>{
             const requests = res.data;
-            this.setState({requests});
+            this._isMounted && this.setState({requests});
         });
     }
 
     componentDidMount(){
+        this._isMounted = true;
        this.getRequestsFromDB();
     }
 
     componentDidUpdate(){
-        this.getRequestsFromDB();
+        this._isMounted && this.getRequestsFromDB();
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     render() {
