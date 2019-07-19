@@ -23,11 +23,18 @@ module.exports = function(app, db){
     }
     app.post("/api/requests", postErrand)
     
-
-    app.put("/api/requests/:id",function(req,resp){
+    updataErrand = function(req,resp){
         dao.update(req.body,req.params.id,function({error,data}){
             resp.json(data);
         })
-    })
+    }
+    app.put("/api/requests/:id", updataErrand);
+
+    deleteErrand = function(req,resp){
+        dao.delete(req.params.id,function({error,data}){
+            resp.json(data);
+        })
+    }
+    app.delete("/api/requests/:id",deleteErrand);
 
 }

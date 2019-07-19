@@ -32,6 +32,11 @@ module.exports=function(db){
             });
         },
 
-        delete(id,cb){}
+        delete(id,cb){
+            db.paramQuery("DELETE from request where id=?",id,function({error,data}){
+                cb(data);
+            });
+ 
+        }
     }
 }

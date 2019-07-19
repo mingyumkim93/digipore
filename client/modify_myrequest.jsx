@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-export class ModifyMyRequest extends React.Component
-{
+export class ModifyMyRequest extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            request:{
+        this.state = {
+            request: {
                 id: 0,
                 title: "",
                 isAccepted: false,
@@ -15,35 +14,35 @@ export class ModifyMyRequest extends React.Component
                 requesting_user_id: "",
                 providing_user_id: ""
             },
-                newTitle: "",
-                newExplanation: ""
-        },this._isMounted = false;
+            newTitle: "",
+            newExplanation: ""
+        }, this._isMounted = false;
     }
 
-    getRequestFromDB(requestId){
+    getRequestFromDB(requestId) {
         axios.get(`/api/requests/${requestId}`).then(res => {
             const request = res.data;
             this._isMounted && this.setState({ request });
         });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this._isMounted = true;
         let requestId = this.props.match.params.id;
         if (requestId) this.getRequestFromDB(requestId);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this._isMounted = false;
     }
 
-    textChanged(ev){
-        this.setState({[ev.target.id] : ev.target.value});
+    textChanged(ev) {
+        this.setState({ [ev.target.id]: ev.target.value });
     }
 
-    modifyTheRequest(){
+    modifyTheRequest() {
         let requestId = this.props.match.params.id;
-        let newRequest={
+        let newRequest = {
             id: this.state.request.id,
             title: this.state.newTitle,
             isAccepted: this.state.request.isAccepted,
@@ -51,20 +50,32 @@ export class ModifyMyRequest extends React.Component
             requesting_user_id: this.state.request.requesting_user_id,
             providing_user_id: this.state.request.providing_user_id
         };
-        axios.put(`/api/requests/${requestId}`,newRequest).then(res=>{
+        axios.put(`/api/requests/${requestId}`, newRequest).then(res => {
             const request = res.data;
-            this._isMounted && this.setState({request});
+            this._isMounted && this.setState({ request });
         });
 
     }
 
-    render(){
+    deleteErrand(){
+        let requestId = this.props.match.params.id;
+        axios.delete(`/api/requests/${requestId}`).then(res=>console.log("An Errand was DELETED"))
+    }
+
+    render() {
         return <div>
             <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" placeholder="title"></input>
             <input onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" placeholder="explanation"></input>
-            <button onClick={()=> {this.modifyTheRequest();
-                                   this.props.history.push("/main")}}>modify</button>
-            <button onClick={()=> this.props.history.push("/main")}>cancel</button>
+            <button onClick={() => {
+                this.modifyTheRequest();
+                this.props.history.push("/main")
+            }}>modify</button>
+            <button onClick={() => {
+                this.deleteErrand();
+                this.props.history.push("/main")
+            }}>delete</button>
+            <button onClick={() => this.props.history.push("/main")}>cancel</button>
+
         </div>
     }
 }
