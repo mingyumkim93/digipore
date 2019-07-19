@@ -9,7 +9,7 @@ export class RequestDetail extends React.Component {
             request: {
                 id: 0,
                 title: "",
-                isAccapted: false,
+                isAccepted: false,
                 explanation: "",
                 requesting_user_id: "",
                 providing_user_id: ""
@@ -36,9 +36,17 @@ export class RequestDetail extends React.Component {
 
     render() {
         let requestId = this.props.match.params.id;
+        let newRequest = {
+            id: 0,
+            title: "after update",
+            isAccepted: true,
+            explanation: "this has been changed",
+            requesting_user_id: "",
+            providing_user_id: ""
+        }
         return <div> <h2>{this.state.request.explanation}</h2>
         <button onClick={()=>{
-            axios.put(`/api/requests/${requestId}`).then(res=>{
+            axios.put(`/api/requests/${requestId}`,newRequest).then(res=>{
                 const request = res.data;
                 this._isMounted && this.setState({request});
             });

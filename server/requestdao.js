@@ -24,8 +24,10 @@ module.exports=function(db){
             })
         },
 
-        update(id,cb){
-            db.paramQuery("UPDATE request SET isAccepted=true where id=?",[id],function({error,data}){
+        update(req,id,cb){
+            db.paramQuery( `UPDATE request SET isAccepted=?, title=?, explanation=?, providing_user_id=? where id=${id}`,
+                            [req.isAccepted,req.title,req.explanation,req.providing_user_id],function({error,data}){
+               
                 cb(data);
             });
         },
