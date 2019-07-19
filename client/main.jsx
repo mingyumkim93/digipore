@@ -5,7 +5,10 @@ import {Link} from 'react-router-dom';
 
 const Requests = ({request, props, currentId}) =><tr>
     
-    <td><Link to={`request/${request.id}`}>{request.id}</Link></td>
+    {currentId == request.requesting_user_id && 
+    <td><Link to={`myrequest/${request.id}`}>Myrequest</Link></td>}
+     {currentId !== request.requesting_user_id && 
+    <td><Link to={`request/${request.id}`}>{request.id}</Link></td>}
     <td>{request.requesting_user_id}</td>
     <td>{request.title}</td>
     {/* todo : think about how to implement different bahavior for modigying...*/}

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import auth from './auth';
 
 export class RequestDetail extends React.Component {
 
@@ -37,12 +38,12 @@ export class RequestDetail extends React.Component {
     render() {
         let requestId = this.props.match.params.id;
         let newRequest = {
-            id: 0,
-            title: "after update",
+            id: null,
+            title: this.state.request.title,
             isAccepted: true,
-            explanation: "this has been changed",
-            requesting_user_id: "",
-            providing_user_id: ""
+            explanation: this.state.request.explanation,
+            requesting_user_id: this.state.request.requesting_user_id,
+            providing_user_id: auth.currentId
         }
         return <div> <h2>{this.state.request.explanation}</h2>
         <button onClick={()=>{
