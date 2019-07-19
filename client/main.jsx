@@ -28,23 +28,29 @@ export class Main extends React.Component {
     }
 
      getRequestsFromDB(){
+         console.log("main-get called");
          axios.get('/api/requests').then(res=>{
             const requests = res.data;
             this._isMounted && this.setState({requests});
         });
     }
+    componentDidUpdate(){
+        console.log("main-component did update");
+    }
 
     componentDidMount(){
+        console.log("main-component did mount");
         this._isMounted = true;
         this.getRequestsFromDB();
-        this.forceUpdate();
     }
 
     componentWillUnmount(){
+        console.log("main-component unmount");
         this._isMounted = false;
     }
 
     render() {
+        console.log("main-render");
         let {requests} = this.state;
         let rows = requests.map(request => <Requests request={request} props={this.props} key={request.id} currentId={auth.currentId}/>)
         return <div>

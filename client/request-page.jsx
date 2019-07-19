@@ -13,6 +13,7 @@ export class RequestPage extends React.Component {
   }
 
   createRequest() {
+    console.log("request-page post called");
      axios.post('/api/requests', {
       id: null,
       title:this.state.title,
@@ -29,7 +30,18 @@ export class RequestPage extends React.Component {
       });
   }
 
+  componentDidMount(){
+    console.log("request-page component did mount");
+  }
+  componentDidUpdate(){
+    console.log("request-page did update");
+  }
+  componentWillUnmount(){
+    console.log("request-page will unmount");
+  }
+
   render() {
+    console.log("request-page render");
     return <div>
       <input type="text" id="title" placeholder="title" onChange={ev => this.textChanged(ev)} />
       <input type="text" id="requestExplanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
