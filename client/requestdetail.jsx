@@ -45,6 +45,7 @@ export class RequestDetail extends React.Component {
             requesting_user_id: this.state.request.requesting_user_id,
             providing_user_id: auth.currentId
         }
+        console.log(newRequest);
         return <div> <h2>{this.state.request.explanation}</h2>
         <button onClick={()=>{
             axios.put(`/api/requests/${requestId}`,newRequest).then(res=>{
