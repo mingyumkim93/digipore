@@ -7,7 +7,11 @@ app.use(bodyParser.json());
 
 let db = require("./mysqlhelper");
 let requestApi = require("./requestapi");
+let userApi = require('./userapi');
+
 requestApi(app,db);
+userApi(app,db);
+
 app.listen(9000);
 
 
