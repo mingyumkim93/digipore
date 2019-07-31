@@ -1,17 +1,5 @@
-module.exports = function (app, db) {
-    var session = require('express-session');
-    app.use(session({
-        secret: 'alskdjskal',
-        resave: false,
-        saveUninitialized: true
-    }));
-
-    var passport = require('passport')
-        , LocalStrategy = require('passport-local').Strategy;
-
-    app.use(passport.initialize());
-    app.use(passport.session());
-
+module.exports = function (app, db, passport, LocalStrategy) {
+    
     let users = [];
     let dao = require("./userdao")(db);
     dao.getAllUsers(function ({ error, data }) {

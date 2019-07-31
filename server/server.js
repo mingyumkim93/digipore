@@ -5,12 +5,25 @@ app.use(express.static("../wwwroot"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+var session = require('express-session');
+    app.use(session({
+        secret: 'alskdjskal',
+        resave: false,
+        saveUninitialized: true
+    }));
+
+    var passport = require('passport')
+        , LocalStrategy = require('passport-local').Strategy;
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
 let db = require("./mysqlhelper");
 let requestApi = require("./requestapi");
 let userApi = require('./userapi');
 
 requestApi(app,db);
-userApi(app,db);
+userApi(app,db,passport,LocalStrategy);
 
 app.listen(9000);
 
