@@ -1,9 +1,9 @@
 var express = require("express");
-const bodyParser = require("body-parser");
+var bodyParser = require("body-parser");
 var app = express();
 app.use(express.static("../wwwroot"));
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({extended:false}));
 
 let db = require("./mysqlhelper");
 let requestApi = require("./requestapi");

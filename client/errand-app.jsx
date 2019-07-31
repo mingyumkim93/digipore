@@ -15,7 +15,7 @@ export class ErrandApp extends React.Component {
         return <div>
             <Switch>
                 <Route exact path="/" component={LoginPage} />
-                <ProtectedRoute exact path="/main" component={Main} />
+                <Route exact path="/main" component={Main} />
                 <ProtectedRoute exact path="/createrequest" component={RequestPage}/>
                 <ProtectedRoute exact path="/mypage" component={MyPage}/>
                 <ProtectedRoute exact path="/accept" component={AcceptPage}/>
