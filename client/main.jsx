@@ -74,6 +74,7 @@ export class Main extends React.Component {
                 auth.currentId="";
                 auth.logout(()=>
                 this.props.history.push("/"))
+                localStorage.setItem("isAuthenticated",false)
             }}>Logout</button>
             
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import auth from './auth';
 
 export class LoginPage extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ export class LoginPage extends React.Component {
         .then((resp) =>{
             console.log("axios post from login page : " + emailInput +" " + passwordInput);
             if(resp.status == 200){
-                this.props.history.push("/main");
+                localStorage.setItem("isAuthenticated",true)
+                auth.login(()=>this.props.history.push("/main"));
         }})
         .catch((err)=>console.log("there is error" + err));
         //todo : better error handling

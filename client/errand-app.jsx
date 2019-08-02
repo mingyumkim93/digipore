@@ -8,6 +8,7 @@ import { MyPage } from './my-page';
 import { AcceptPage } from './accept-page';
 import { RequestDetail } from './requestdetail';
 import { ModifyMyRequest } from './modify_myrequest';
+import auth from './auth';
 
 export class ErrandApp extends React.Component {
 
@@ -15,7 +16,7 @@ export class ErrandApp extends React.Component {
         return <div>
             <Switch>
                 <Route exact path="/" component={LoginPage} />
-                <Route exact path="/main" component={Main} />
+                <ProtectedRoute exact path="/main" component={Main} />
                 <ProtectedRoute exact path="/createrequest" component={RequestPage}/>
                 <ProtectedRoute exact path="/mypage" component={MyPage}/>
                 <ProtectedRoute exact path="/accept" component={AcceptPage}/>
