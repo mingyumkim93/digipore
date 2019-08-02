@@ -8,7 +8,6 @@ import { MyPage } from './my-page';
 import { AcceptPage } from './accept-page';
 import { RequestDetail } from './requestdetail';
 import { ModifyMyRequest } from './modify_myrequest';
-import auth from './auth';
 
 export class ErrandApp extends React.Component {
 

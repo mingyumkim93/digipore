@@ -1,5 +1,4 @@
 import React from 'react';
-import auth from './auth';
 import axios from 'axios';
 export class RequestPage extends React.Component {
 
@@ -18,7 +17,7 @@ export class RequestPage extends React.Component {
       id: null,
       title:this.state.title,
       explanation: this.state.requestExplanation,
-      requesting_user_id: auth.currentId,
+      requesting_user_id: localStorage.getItem("currentUser"),
       providing_user_id: null,
       isAccepted:false
     })

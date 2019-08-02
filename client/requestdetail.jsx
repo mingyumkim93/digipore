@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import auth from './auth';
 
 export class RequestDetail extends React.Component {
 
@@ -43,7 +42,7 @@ export class RequestDetail extends React.Component {
             isAccepted: true,
             explanation: this.state.request.explanation,
             requesting_user_id: this.state.request.requesting_user_id,
-            providing_user_id: auth.currentId
+            providing_user_id: localStorage.getItem("currentUser")
         }
         console.log(newRequest);
         return <div> <h2>{this.state.request.explanation}</h2>

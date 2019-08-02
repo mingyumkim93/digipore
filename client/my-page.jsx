@@ -36,11 +36,11 @@ export class MyPage extends React.Component{
         let requestsIRequested = [];
         let requestsIProvide = [];
         this.state.requests.forEach(request => {
-            if (request.requesting_user_id == auth.currentId)
+            if (request.requesting_user_id == localStorage.getItem("currentUser"))
                 requestsIRequested.push(request);
         })
         this.state.requests.forEach(request => {
-            if (request.providing_user_id == auth.currentId)
+            if (request.providing_user_id == localStorage.getItem("currentUser"))
                 requestsIProvide.push(request);
         })
         let rowsRequestsIRequested = requestsIRequested.map(request => <RequestsIRequested

@@ -52,7 +52,7 @@ export class Main extends React.Component {
     render() {
         console.log("main-render");
         let {requests} = this.state;
-        let rows = requests.map(request => <Requests request={request} props={this.props} key={request.id} currentId={auth.currentId}/>)
+        let rows = requests.map(request => <Requests request={request} props={this.props} key={request.id} currentId={localStorage.getItem("currentUser")}/>)
         return <div>
             <button onClick={()=>this.props.history.push("/createrequest")}> New Request </button>
             <button onClick={()=>this.props.history.push("/mypage")}> My Page </button>
@@ -71,10 +71,9 @@ export class Main extends React.Component {
                 </tbody>
             </table>
             <button onClick={()=>{
-                auth.currentId="";
-                auth.logout(()=>
-                this.props.history.push("/"))
-                localStorage.setItem("isAuthenticated",false)
+                localStorage.getItem("currentUser");
+                this.props.history.push("/")
+                localStorage.clear();
             }}>Logout</button>
             
         </div>

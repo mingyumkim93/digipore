@@ -1,5 +1,5 @@
 module.exports = function (app, db, passport, LocalStrategy) {
-    
+
     let users = [];
     let dao = require("./userdao")(db);
     dao.getAllUsers(function ({ error, data }) {
@@ -42,7 +42,7 @@ module.exports = function (app, db, passport, LocalStrategy) {
     ));
 
     app.post('/login',
-        passport.authenticate('local'),function(req, res) {
+        passport.authenticate('local'), function (req, res) {
             console.log("authentication is done successfully");
             res.redirect("/main")
         });
