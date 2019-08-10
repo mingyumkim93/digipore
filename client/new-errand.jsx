@@ -1,34 +1,34 @@
 import React from 'react';
 import axios from 'axios';
-export class RequestPage extends React.Component {
+export class NewErrandPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { title:"", requestExplanation: "", location:"" }
+    this.state = { title:"", explanation: "", location:"" }
   }
 
   textChanged(ev) {
     this.setState({ [ev.target.id]: ev.target.value });
   }
 
-  createRequest() {
+  createErrand() {
     if(!this.state.title){
       window.alert("You can't empty title!");
       return;
     }
-    if(!this.state.requestExplanation){
+    if(!this.state.explanation){
       window.alert("You can't empty explanation!");
       return;
     }
 
     var d = new Date();
     let now = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-     axios.post('/api/requests', {
+     axios.post('/api/errands', {
       id: null,
       title:this.state.title,
-      explanation: this.state.requestExplanation,
-      requesting_user_id: localStorage.getItem("currentUser"),
-      providing_user_id: null,
+      explanation: this.state.explanation,
+      poster: localStorage.getItem("currentUser"),
+      runner: null,
       state:0,
       requestedDayAndTime:now,
       acceptedDayAndTime:null,
@@ -46,10 +46,10 @@ export class RequestPage extends React.Component {
     return <div>
       <input type="text" id="title" placeholder="title" onChange={ev => this.textChanged(ev)} />
       <input type="text" id="location" placeholder="location" onChange={ev=> this.textChanged(ev)} />
-      <textarea type="text" id="requestExplanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
+      <textarea type="text" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
       <button onClick={() => {
-        this.createRequest();
-      }}>Request</button>
+        this.createErrand();
+      }}>Post</button>
       <button onClick={() => this.props.history.push("/main")}>Cancel</button>
     </div>
   }

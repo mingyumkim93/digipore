@@ -1,38 +1,38 @@
 import React from 'react';
 import axios from 'axios';
 
-export class ModifyMyRequest extends React.Component {
+export class ModifyMyErrandPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            request: {},
+            errand: {},
             newTitle: "",
             newExplanation: "",
             newLocation:""
         }
     }
 
-    getRequestFromDB(requestId) {
-        axios.get(`/api/requests/${requestId}`).then(res => {
-            const request = res.data;
-            this.setState({ request });
-            this.setState({newTitle : request.title})
-            this.setState({newExplanation : request.explanation})
-            this.setState({newLocation:request.location})
+    getErrandFromDB(errandId) {
+        axios.get(`/api/errands/${errandId}`).then(res => {
+            const errand = res.data;
+            this.setState({ errand });
+            this.setState({newTitle : errand.title})
+            this.setState({newExplanation : errand.explanation})
+            this.setState({newLocation:errand.location})
         });
     }
 
     componentDidMount() {
-        let requestId = this.props.match.params.id;
-        if (requestId) this.getRequestFromDB(requestId);
+        let errandId = this.props.match.params.id;
+        if (errandId) this.getErrandFromDB(errandId);
     }
 
     textChanged(ev) {
         this.setState({ [ev.target.id]: ev.target.value });
     }
     
-    modifyRequest() {
+    modifyErrand() {
         if (!this.state.newTitle) {
             window.alert("You can't empty title!");
             return;
@@ -45,17 +45,17 @@ export class ModifyMyRequest extends React.Component {
             window.alert("You can't empty location!");
             return;
         }
-        let requestId = this.props.match.params.id;
-        let newRequest = this.state.request;
-        newRequest.title = this.state.newTitle;
-        newRequest.explanation = this.state.newExplanation;
-        newRequest.location = this.state.newLocation;
-        axios.put(`/api/requests/${requestId}`,newRequest).then(()=>this.props.history.push("/main"));
+        let errandId = this.props.match.params.id;
+        let newErrand = this.state.errand;
+        newErrand.title = this.state.newTitle;
+        newErrand.explanation = this.state.newExplanation;
+        newErrand.location = this.state.newLocation;
+        axios.put(`/api/errands/${errandId}`,newErrand).then(()=>this.props.history.push("/main"));
     }
 
     deleteErrand(){
-        let requestId = this.props.match.params.id;
-        axios.delete(`/api/requests/${requestId}`).then(()=>this.props.history.push("/main"))
+        let errandId = this.props.match.params.id;
+        axios.delete(`/api/errands/${errandId}`).then(()=>this.props.history.push("/main"))
     }
 
     render() {
@@ -65,7 +65,7 @@ export class ModifyMyRequest extends React.Component {
             <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation}/>
             <input onChange={ev=> this.textChanged(ev)} type="text" id="newLocation" value={newLocation}/>
             <button onClick={() => {
-                this.modifyRequest();
+                this.modifyErrand();
             }}>modify</button>
             <button onClick={() => {
                 this.deleteErrand();

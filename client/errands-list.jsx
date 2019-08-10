@@ -1,24 +1,24 @@
 import React from 'react';
 import axios from 'axios';
-import {Requests} from './requests';
+import {Errands} from './errands';
 
-export class Main extends React.Component {
+export class ErrandsListPage extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-          requests:[],filter:""
+          errands:[],filter:""
         }
     }
 
-     getRequestsFromDB(){
-         axios.get('/api/requests').then(res=>{
-            const requests = res.data;
-            this.setState({requests});
+    getErrandsFromDB(){
+         axios.get('/api/errands').then(res=>{
+            const errands = res.data;
+            this.setState({errands: errands});
         });
     }
     componentDidMount(){
-        this.getRequestsFromDB();
+        this.getErrandsFromDB();
     }
 
     filterChanged(e){
@@ -26,13 +26,13 @@ export class Main extends React.Component {
     }
 
     render() {
-        let {requests,filter} = this.state;
-        let filtered = requests.filter(request => request.title.includes(filter));
-        let rows = filtered.map(request => <Requests request={request} key={request.id} currentId={localStorage.getItem("currentUser")}/>)
+        let {errands,filter} = this.state;
+        let filtered = errands.filter(errand => errand.title.includes(filter));
+        let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentId={localStorage.getItem("currentUser")}/>)
        
         return <div>
-            <button onClick={()=>this.props.history.push("/createrequest")}> New Request </button>
-            <button onClick={()=>this.props.history.push("/mypage")}> My Page </button>
+            <button onClick={()=>this.props.history.push("/createrequest")}> New Errand </button>
+            <button onClick={()=>this.props.history.push("/mypage")}> My Errands </button>
             <input type="text" id="filter" placeholder="Filter" onChange={e=>this.filterChanged(e)} />
             <table>
                 <thead>

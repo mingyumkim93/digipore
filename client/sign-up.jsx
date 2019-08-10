@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-export class SignUp extends React.Component{
+export class SignUpPage extends React.Component{
 
     constructor(props){
         super(props);

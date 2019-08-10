@@ -19,11 +19,11 @@ var session = require('express-session');
     app.use(passport.session());
 
 let db = require("./mysqlhelper");
-let requestApi = require("./requestapi");
+let errandApi = require("./errandapi");
 let userApi = require('./userapi');
 let reviewApi = require('./reviewapi')
 
-requestApi(app,db);
+errandApi(app,db);
 userApi(app,db,passport,LocalStrategy);
 reviewApi(app,db)
 
