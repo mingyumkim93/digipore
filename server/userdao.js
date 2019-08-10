@@ -16,6 +16,12 @@ module.exports=function(db){
                 if (error) cb({error});
                 else cb({data});
             });
+        },
+        createUser(user, cb){
+            db.paramQuery("INSERT INTO user SET ?",user,function({error,data}){
+                if(error) cb({error});
+                else cb({data});
+            })
         }
     }
 }

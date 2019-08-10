@@ -1,21 +1,24 @@
 import React from 'react';
-import auth from './auth';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-const Requests = ({request, props, currentId}) =><tr>
-    
-    {currentId == request.requesting_user_id && 
-    <td><Link to={`myrequest/${request.id}`}>Myrequest</Link></td>}
-     {currentId !== request.requesting_user_id && 
-    <td><Link to={`request/${request.id}`}>{request.id}</Link></td>}
-    <td>{request.requesting_user_id}</td>
-    <td>{request.title}</td>
-    {/* todo : think about how to implement different bahavior for modigying...*/}
-   
-    <td>{request.isAccepted? 'Under processing':'Waiting for accept'}</td>
-    {/* Find better way.. */}
-</tr>
+const Requests = function({request, currentId}) {
+    if (request.state !== 40) // Show only not terminated requests
+        return <tr>
+            {currentId == request.requesting_user_id &&
+                <td><Link to={`myrequest/${request.id}`}>Myrequest</Link></td>}
+            {currentId !== request.requesting_user_id &&
+                <td><Link to={`request/${request.id}`}>{request.id}</Link></td>}
+            <td>{request.requesting_user_id}</td>
+            <td>{request.title}</td>
+            <td>{request.location}</td>
+            {request.state == 0 && <td>Waiting for accept</td>}
+            {request.state !== 0 && <td>Under processing</td>}
+            <td>{request.requestedDayAndTime}</td>
+        </tr>
+    else  // Don't show terminated request 
+        return <tr></tr>
+}
 
 
 export class Main extends React.Component {
@@ -23,47 +26,42 @@ export class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          requests:[]
-        },this._isMounted = false;
+          requests:[],filter:""
+        }
     }
 
      getRequestsFromDB(){
-         console.log("main-get called");
          axios.get('/api/requests').then(res=>{
             const requests = res.data;
-            this._isMounted && this.setState({requests});
+            this.setState({requests});
         });
     }
-    componentDidUpdate(){
-        console.log("main-component did update");
-    }
-
     componentDidMount(){
-        console.log("main-component did mount");
-        this._isMounted = true;
         this.getRequestsFromDB();
     }
 
-    componentWillUnmount(){
-        console.log("main-component unmount");
-        this._isMounted = false;
+    filterChanged(e){
+        this.setState({ [e.target.id]: e.target.value });
     }
 
     render() {
-        console.log("main-render");
-        let {requests} = this.state;
-        let rows = requests.map(request => <Requests request={request} props={this.props} key={request.id} currentId={localStorage.getItem("currentUser")}/>)
+        let {requests,filter} = this.state;
+        let filtered = requests.filter(request => request.title.includes(filter));
+        let rows = filtered.map(request => <Requests request={request} props={this.props} key={request.id} currentId={localStorage.getItem("currentUser")}/>)
+       
         return <div>
             <button onClick={()=>this.props.history.push("/createrequest")}> New Request </button>
             <button onClick={()=>this.props.history.push("/mypage")}> My Page </button>
-            <input type="text" placeholder="Filter" />
+            <input type="text" id="filter" placeholder="Filter" onChange={e=>this.filterChanged(e)} />
             <table>
                 <thead>
                     <tr>
                         <td>Number</td>
                         <td>Requesting User</td>
                         <td>Title</td>
+                        <td>Location</td>
                         <td>State</td>
+                        <td>Date</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,9 +69,8 @@ export class Main extends React.Component {
                 </tbody>
             </table>
             <button onClick={()=>{
-                localStorage.getItem("currentUser");
-                this.props.history.push("/")
                 localStorage.clear();
+                this.props.history.push("/");
             }}>Logout</button>
             
         </div>

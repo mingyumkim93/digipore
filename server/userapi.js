@@ -1,6 +1,5 @@
 module.exports = function (app, db, passport, LocalStrategy) {
 
-    let users = [];
     let dao = require("./userdao")(db);
     dao.getAllUsers(function ({ error, data }) {
         users = data;
@@ -37,7 +36,6 @@ module.exports = function (app, db, passport, LocalStrategy) {
                 console.log("all clear")
                 return done(null, data[0])
             })
-
         }
     ));
 
@@ -46,4 +44,23 @@ module.exports = function (app, db, passport, LocalStrategy) {
             console.log("authentication is done successfully");
             res.redirect("/main")
         });
+
+    app.get('/api/user/:email',function(req,res){
+        dao.getUserByEmail(req.params.email,function({err, data}){
+            delete data[0].password;
+            res.json(data[0]);
+        })
+    });
+
+    app.post("/api/user",(req,res)=>{
+        dao.getUserByEmail(req.body.email, function({err, data}){
+            if (err) res.send(err);
+            if (data[0]) res.send(404);
+            else {
+                dao.createUser(req.body, function ({ err, data }) {
+                    res.sendStatus(200);
+                });
+            }
+        })
+    });
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import auth from './auth';
 
 export class LoginPage extends React.Component {
     constructor(props) {
@@ -14,26 +13,24 @@ export class LoginPage extends React.Component {
 
     sendLoginRequest(emailInput, passwordInput) {
         if (!emailInput) {
-            console.log("put your email");
+            window.alert("Put your email.");
             return;
         }
 
         if (!passwordInput) {
-            console.log("put you password")
+            window.alert("Put you password.");
             return;
         }
 
         axios.post('/login', { emailInput, passwordInput })
             .then((resp) => {
-                console.log("axios post from login page : " + emailInput + " " + passwordInput);
                 if (resp.status == 200) {
                     localStorage.setItem("isAuthenticated", true);
-                    localStorage.setItem("currentUser",emailInput)
-                    this.props.history.push("/main")
+                    localStorage.setItem("currentUser",emailInput);
+                    this.props.history.push("/main");
                 }
             })
-            .catch((err) => console.log("there is error" + err));
-        //todo : better error handling
+            .catch((err) => window.alert("Please check your email or password."));
     }
 
     render() {
@@ -44,6 +41,7 @@ export class LoginPage extends React.Component {
             <button onClick={
                 () => this.sendLoginRequest(emailInput, passwordInput)}
             >Login</button>
+            <button onClick={()=>this.props.history.push("/signup")} >Sign Up</button>
         </div>
     }
 }

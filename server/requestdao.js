@@ -14,9 +14,6 @@ module.exports=function(db){
                 else cb({data:{}});                
             });
         },
-        getBooks(id,cb){
-            db.paramQuery("SELECT * FROM book where authorId=?",[id],cb);
-        },
         insert(request,cb){
             db.paramQuery("INSERT INTO request SET ?",request,({error,data}) => {
                 if (error) cb({error});
@@ -25,8 +22,8 @@ module.exports=function(db){
         },
 
         update(req,id,cb){
-            db.paramQuery( `UPDATE request SET isAccepted=?, title=?, explanation=?, providing_user_id=? where id=${id}`,
-                            [req.isAccepted,req.title,req.explanation,req.providing_user_id],function({error,data}){
+            db.paramQuery( `UPDATE request SET state=?, title=?, explanation=?, providing_user_id=?, requestedDayAndTime=?, acceptedDayAndTime=?, location=? where id=${id}`,
+                            [req.state,req.title,req.explanation,req.providing_user_id,req.requestedDayAndTime,req.acceptedDayAndTime, req.location],function({error,data}){
                
                 cb(data);
             });

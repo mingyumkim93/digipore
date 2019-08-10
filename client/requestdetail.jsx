@@ -9,50 +9,53 @@ export class RequestDetail extends React.Component {
             request: {
                 id: 0,
                 title: "",
-                isAccepted: false,
+                state: 0,
                 explanation: "",
                 requesting_user_id: "",
-                providing_user_id: ""
+                providing_user_id: "",
+                location:""
             }
-        },this._isMounted=false;
+        }
     }
 
     getRequestFromDB(requestId) {
         axios.get(`/api/requests/${requestId}`).then(res => {
             const request = res.data;
-            this._isMounted && this.setState({ request });
+            this.setState({ request });
         });
     }
 
     componentDidMount() {
-        this._isMounted = true;
         let requestId = this.props.match.params.id;
         if (requestId) this.getRequestFromDB(requestId);
     }
 
-    componentWillUnmount(){
-        this._isMounted = false;
-    }
-
-    render() {
+    acceptRequest(){
+        var d = new Date();
+        let now = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
         let requestId = this.props.match.params.id;
         let newRequest = {
             id: null,
             title: this.state.request.title,
-            isAccepted: true,
+            state: 10,
             explanation: this.state.request.explanation,
             requesting_user_id: this.state.request.requesting_user_id,
-            providing_user_id: localStorage.getItem("currentUser")
-        }
-        console.log(newRequest);
+            providing_user_id: localStorage.getItem("currentUser"),
+            requestedDayAndTime:this.state.request.requestedDayAndTime,
+            acceptedDayAndTime:now,
+            location:this.state.request.location
+        };
+        axios.put(`/api/requests/${requestId}`,newRequest).then(res=>{
+            this.props.history.push("/main");
+        });
+    }
+
+    render() {
         return <div> <h2>{this.state.request.explanation}</h2>
-        <button onClick={()=>{
-            axios.put(`/api/requests/${requestId}`,newRequest).then(res=>{
-                const request = res.data;
-                this._isMounted && this.setState({request});
-            });
-            this.props.history.push("/main");                    
-                                }}>Accept</button>
+        {this.state.request.state==0 && <button onClick={()=>this.acceptRequest()}>Accept</button>}
+        <button onClick={()=>this.props.history.push("/main")}>
+            Back to main
+        </button>
         </div>
     }
 }

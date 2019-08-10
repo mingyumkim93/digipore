@@ -21,9 +21,11 @@ var session = require('express-session');
 let db = require("./mysqlhelper");
 let requestApi = require("./requestapi");
 let userApi = require('./userapi');
+let reviewApi = require('./reviewapi')
 
 requestApi(app,db);
 userApi(app,db,passport,LocalStrategy);
+reviewApi(app,db)
 
 app.listen(9000);
 

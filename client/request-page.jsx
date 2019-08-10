@@ -4,7 +4,7 @@ export class RequestPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { title:"", requestExplanation: "" }
+    this.state = { title:"", requestExplanation: "", location:"" }
   }
 
   textChanged(ev) {
@@ -12,42 +12,43 @@ export class RequestPage extends React.Component {
   }
 
   createRequest() {
-    console.log("request-page post called");
+    if(!this.state.title){
+      window.alert("You can't empty title!");
+      return;
+    }
+    if(!this.state.requestExplanation){
+      window.alert("You can't empty explanation!");
+      return;
+    }
+
+    var d = new Date();
+    let now = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
      axios.post('/api/requests', {
       id: null,
       title:this.state.title,
       explanation: this.state.requestExplanation,
       requesting_user_id: localStorage.getItem("currentUser"),
       providing_user_id: null,
-      isAccepted:false
+      state:0,
+      requestedDayAndTime:now,
+      acceptedDayAndTime:null,
+      location:this.state.location
     })
-      .then(function (response) {
-        console.log(response);
+      .then((res) => {
+        this.props.history.push("/main");
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((err)=> {
+        console.log(err);
       });
   }
 
-  componentDidMount(){
-    console.log("request-page component did mount");
-  }
-  componentDidUpdate(){
-    console.log("request-page did update");
-  }
-  componentWillUnmount(){
-    console.log("request-page will unmount");
-  }
-
   render() {
-    console.log("request-page render");
     return <div>
       <input type="text" id="title" placeholder="title" onChange={ev => this.textChanged(ev)} />
-      <input type="text" id="requestExplanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
-      
+      <input type="text" id="location" placeholder="location" onChange={ev=> this.textChanged(ev)} />
+      <textarea type="text" id="requestExplanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
       <button onClick={() => {
         this.createRequest();
-        this.props.history.push("/main");
       }}>Request</button>
       <button onClick={() => this.props.history.push("/main")}>Cancel</button>
     </div>
