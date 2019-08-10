@@ -6,15 +6,7 @@ export class RequestDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            request: {
-                id: 0,
-                title: "",
-                state: 0,
-                explanation: "",
-                requesting_user_id: "",
-                providing_user_id: "",
-                location:""
-            }
+            request: {}
         }
     }
 
@@ -33,19 +25,11 @@ export class RequestDetail extends React.Component {
     acceptRequest(){
         var d = new Date();
         let now = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-        let requestId = this.props.match.params.id;
-        let newRequest = {
-            id: null,
-            title: this.state.request.title,
-            state: 10,
-            explanation: this.state.request.explanation,
-            requesting_user_id: this.state.request.requesting_user_id,
-            providing_user_id: localStorage.getItem("currentUser"),
-            requestedDayAndTime:this.state.request.requestedDayAndTime,
-            acceptedDayAndTime:now,
-            location:this.state.request.location
-        };
-        axios.put(`/api/requests/${requestId}`,newRequest).then(res=>{
+        let updatedRequest = this.state.request;
+        updatedRequest.state=10;
+        updatedRequest.providing_user_id = localStorage.getItem("currentUser");
+        updatedRequest.acceptedDayAndTime=now;
+        axios.put(`/api/requests/${updatedRequest.id}`,updatedRequest).then(res=>{
             this.props.history.push("/main");
         });
     }

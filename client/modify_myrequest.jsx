@@ -6,17 +6,7 @@ export class ModifyMyRequest extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            request: {
-                id: 0,
-                title: "",
-                state: 0,
-                explanation: "",
-                requesting_user_id: "",
-                providing_user_id: "",
-                requestedDayAndTime:null,
-                acceptedDayAndTime:null,
-                location:""
-            },
+            request: {},
             newTitle: "",
             newExplanation: "",
             newLocation:""
@@ -41,7 +31,7 @@ export class ModifyMyRequest extends React.Component {
     textChanged(ev) {
         this.setState({ [ev.target.id]: ev.target.value });
     }
-
+    
     modifyRequest() {
         if (!this.state.newTitle) {
             window.alert("You can't empty title!");
@@ -56,17 +46,10 @@ export class ModifyMyRequest extends React.Component {
             return;
         }
         let requestId = this.props.match.params.id;
-        let newRequest = {
-            id: this.state.request.id,
-            title: this.state.newTitle,
-            state: this.state.request.state,
-            explanation: this.state.newExplanation,
-            requesting_user_id: this.state.request.requesting_user_id,
-            providing_user_id: this.state.request.providing_user_id,
-            requestedDayAndTime: this.state.request.requestedDayAndTime,
-            acceptedDayAndTime: this.state.request.acceptedDayAndTime,
-            location:this.state.newLocation
-        };
+        let newRequest = this.state.request;
+        newRequest.title = this.state.newTitle;
+        newRequest.explanation = this.state.newExplanation;
+        newRequest.location = this.state.newLocation;
         axios.put(`/api/requests/${requestId}`,newRequest).then(()=>this.props.history.push("/main"));
     }
 
