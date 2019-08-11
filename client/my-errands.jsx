@@ -2,14 +2,21 @@ import React from 'react';
 import axios from 'axios';
 import {ErrandsIPosted} from './errands-i-posted';
 import {ErrandsIRun} from './errands-i-run';
-
+import {Test} from'./test'
 export class MyErrandsPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            errands: []
+            errands: [],
+            updateMyErrandsList:false
         }
+        this.updateMyErrandsList = this.updateMyErrandsList.bind(this)
+    }
+
+    updateMyErrandsList(val){
+        this.setState({updateMyErrandsList:val})
+
     }
 
     componentDidMount() {
@@ -31,10 +38,10 @@ export class MyErrandsPage extends React.Component {
                 errandsIRun.push(errand);
         });
         let rowsErrandsIPosted = errandsIPosted.map(errand => <ErrandsIPosted
-            errand={errand} key={errand.id}>
+            errand={errand} key={errand.id} updateMyErrandsList={this.updateMyErrandsList}>
         </ErrandsIPosted>);
         let rowsErrandsIRun = errandsIRun.map(errand => <ErrandsIRun
-            errand={errand} key={errand.id}>
+            errand={errand} key={errand.id} updateMyErrandsList={this.updateMyErrandsList}>
         </ErrandsIRun>);
         return <div>
             <div>

@@ -50,7 +50,7 @@ const finalizeErrand = (errand) => {
         .catch(err => console.log(err));
 }
 
-export const ErrandsIRun = ({ errand }) => <tr>
+export const ErrandsIRun = ({ errand, updateMyErrandsList }) => <tr>
     <td>{errand.title}</td>
     <td>{errand.explanation}</td>
     <td>{errand.fee}</td>
@@ -61,11 +61,15 @@ export const ErrandsIRun = ({ errand }) => <tr>
             if (doubleCheck) {
                 RunnerConfirm(errand);
                 leaveReviewToPoster(errand);
+                updateMyErrandsList(true);
             }
         }}>Confirm</button>
         <button onClick={() => {
             let doubleCheck = confirm("Do you really want to cancel running this errand?")
-            if (doubleCheck) { changeErrandToNotAccepted(errand) }
+            if (doubleCheck) { 
+                changeErrandToNotAccepted(errand);
+                updateMyErrandsList(true);
+             }
         }}>Cancel this errand</button></td>}
     {errand.state == 20 && <td>Poster Confirmed. Please Confirm.
     <button onClick={() => {
@@ -73,6 +77,7 @@ export const ErrandsIRun = ({ errand }) => <tr>
             if (doubleCheck) {
                 finalizeErrand(errand);
                 leaveReviewToPoster(errand);
+                updateMyErrandsList(true);
             }
         }}>Confirm</button></td>}
     {errand.state == 30 && <td>You confirmed. Waiting for poster confirm..</td>}
