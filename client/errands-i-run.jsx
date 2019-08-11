@@ -53,6 +53,7 @@ const finalizeErrand = (errand) => {
 export const ErrandsIRun = ({ errand }) => <tr>
     <td>{errand.title}</td>
     <td>{errand.explanation}</td>
+    <td>{errand.fee}</td>
     {errand.state == 0 && <td>Waiting for acceptance</td>}
     {errand.state == 10 && <td>You are running it
     <button onClick={() => {

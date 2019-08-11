@@ -4,7 +4,7 @@ export class NewErrandPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { title:"", explanation: "", location:"" }
+    this.state = { title:"", explanation: "", location:"", fee:null }
   }
 
   textChanged(ev) {
@@ -32,10 +32,11 @@ export class NewErrandPage extends React.Component {
       state:0,
       requestedDayAndTime:now,
       acceptedDayAndTime:null,
-      location:this.state.location
+      location:this.state.location,
+      fee:this.state.fee
     })
       .then((res) => {
-        this.props.history.push("/main");
+        this.props.history.push("/errands-list");
       })
       .catch((err)=> {
         console.log(err);
@@ -44,13 +45,14 @@ export class NewErrandPage extends React.Component {
 
   render() {
     return <div>
-      <input type="text" id="title" placeholder="title" onChange={ev => this.textChanged(ev)} />
-      <input type="text" id="location" placeholder="location" onChange={ev=> this.textChanged(ev)} />
+      <input type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
+      <input type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
+      <input type="text" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
       <textarea type="text" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
       <button onClick={() => {
         this.createErrand();
       }}>Post</button>
-      <button onClick={() => this.props.history.push("/main")}>Cancel</button>
+      <button onClick={() => this.props.history.push("/errands-list")}>Cancel</button>
     </div>
   }
 }

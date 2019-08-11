@@ -13,7 +13,7 @@ export class ErrandDetailPage extends React.Component {
     getErrandFromDB(errandId) {
         axios.get(`/api/errands/${errandId}`).then(res => {
             const errand = res.data;
-            this.setState({ errand: errand });
+            this.setState({ errand });
         });
     }
 
@@ -32,7 +32,7 @@ export class ErrandDetailPage extends React.Component {
             updatedErrand.runner = localStorage.getItem("currentUser");
             updatedErrand.acceptedDayAndTime=now;
             axios.put(`/api/errands/${updatedErrand.id}`,updatedErrand).then(res=>{
-                this.props.history.push("/main");
+                this.props.history.push("/errands-list");
             });
         }
         else return;
@@ -41,7 +41,7 @@ export class ErrandDetailPage extends React.Component {
     render() {
         return <div> <h2>{this.state.errand.explanation}</h2>
         {this.state.errand.state==0 && <button onClick={()=>this.runErrand()}>Run Errand</button>}
-        <button onClick={()=>this.props.history.push("/main")}>
+        <button onClick={()=>this.props.history.push("/errands-list")}>
             Back to list
         </button>
         </div>

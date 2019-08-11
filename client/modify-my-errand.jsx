@@ -9,7 +9,8 @@ export class ModifyMyErrandPage extends React.Component {
             errand: {},
             newTitle: "",
             newExplanation: "",
-            newLocation:""
+            newLocation:"",
+            newFee: 0
         }
     }
 
@@ -20,6 +21,7 @@ export class ModifyMyErrandPage extends React.Component {
             this.setState({newTitle : errand.title})
             this.setState({newExplanation : errand.explanation})
             this.setState({newLocation:errand.location})
+            this.setState({newFee:errand.fee})
         });
     }
 
@@ -50,27 +52,30 @@ export class ModifyMyErrandPage extends React.Component {
         newErrand.title = this.state.newTitle;
         newErrand.explanation = this.state.newExplanation;
         newErrand.location = this.state.newLocation;
-        axios.put(`/api/errands/${errandId}`,newErrand).then(()=>this.props.history.push("/main"));
+        newErrand.fee = this.state.newFee;
+        axios.put(`/api/errands/${errandId}`,newErrand).then(()=>this.props.history.push("/errands-list"));
     }
 
     deleteErrand(){
         let errandId = this.props.match.params.id;
-        axios.delete(`/api/errands/${errandId}`).then(()=>this.props.history.push("/main"))
+        axios.delete(`/api/errands/${errandId}`).then(()=>this.props.history.push("/errands-list"))
     }
 
     render() {
-        let {newTitle, newExplanation, newLocation} = this.state;
+        let {newTitle, newExplanation, newLocation, newFee} = this.state;
         return <div>
             <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle}/>
-            <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation}/>
             <input onChange={ev=> this.textChanged(ev)} type="text" id="newLocation" value={newLocation}/>
+            <input onChange={ev=> this.textChanged(ev)} type="text" id="newFee" value={newFee}/>
+            
+            <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation}/>
             <button onClick={() => {
                 this.modifyErrand();
             }}>modify</button>
             <button onClick={() => {
                 this.deleteErrand();
             }}>delete</button>
-            <button onClick={() => this.props.history.push("/main")}>cancel</button>
+            <button onClick={() => this.props.history.push("/errands-list")}>cancel</button>
 
         </div>
     }

@@ -6,10 +6,12 @@ export class SignUpPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            id:null,
             email:"",
             password:"",
             firstName:"",
-            lastName:""
+            lastName:"",
+            phone:""
         }
     }
 
@@ -18,16 +20,12 @@ export class SignUpPage extends React.Component{
     }
 
     signUp(){
-        let email = this.state.email;
-        let password = this.state.password;
-        let firstName = this.state.firstName;
-        let lastName = this.state.lastName;
-        let id= null;
+        let {id, firstName, lastName, email, password, phone} = this.state;
         if(!(email&&password&&firstName&&lastName)) {
             window.alert("Please fill every fields!");
             return;
         }
-        axios.post("/api/user", { id, firstName, lastName, email, password})
+        axios.post("/api/user", { id, firstName, lastName, email, password, phone})
             .then((res) => {
                 if(res.status==200){
                     window.alert("You signed up successfully. Move to login page.");
@@ -44,12 +42,13 @@ export class SignUpPage extends React.Component{
 
     render(){
         return <div>
-            <input onChange={(e)=>this.textChange(e)} type="text" id="email" placeholder="email"/>
-            <input onChange={(e)=>this.textChange(e)} type="text" id="password" placeholder="password"/>
-            <input onChange={(e)=>this.textChange(e)} type="text" id="firstName" placeholder="firstName"/>
-            <input onChange={(e)=>this.textChange(e)} type="text" id="lastName" placeholder="lastName"/>
+            <input onChange={(e)=>this.textChange(e)} type="text" id="email" placeholder="Email"/>
+            <input onChange={(e)=>this.textChange(e)} type="text" id="password" placeholder="Password"/>
+            <input onChange={(e)=>this.textChange(e)} type="text" id="firstName" placeholder="FirstName"/>
+            <input onChange={(e)=>this.textChange(e)} type="text" id="lastName" placeholder="LastName"/>
+            <input onChange={(e)=>this.textChange(e)} type="text" id="phone" placeholder="Phone"/>
             <button onClick={()=>this.signUp()}>Sign Up</button>
-            <button onClick={()=>this.props.history.push("/")}>Back to main</button>
+            <button onClick={()=>this.props.history.goBack()}>Back</button>
         </div>
     }
 }

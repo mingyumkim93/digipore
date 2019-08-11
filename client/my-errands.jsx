@@ -44,10 +44,11 @@ export class MyErrandsPage extends React.Component {
                         <tr>
                             <td>Title</td>
                             <td>Explanation</td>
+                            <td>Fee</td>
                             <td>State</td>
                             <td>Runner</td>
-                            <td>Posted Day And Time</td>
-                            <td>Accepted Day And Time</td>
+                            <td>Posted</td>
+                            <td>Accepted</td>
                             <td>Location</td>
                         </tr>
                     </thead>
@@ -63,17 +64,18 @@ export class MyErrandsPage extends React.Component {
                         <tr>
                             <td>Title</td>
                             <td>Explanation</td>
+                            <td>Fee</td>
                             <td>State</td>
                             <td>Poster</td>
-                            <td>Posted Day And Time</td>
-                            <td>Accepted Day And Time</td>
+                            <td>Posted</td>
+                            <td>Accepted</td>
                             <td>Location</td>
                         </tr>
                     </thead>
                     <tbody>{rowsErrandsIRun}</tbody>
                 </table>
             </div>
-            <button onClick={() => this.props.history.push("/main")}>Back to list</button>
+            <button onClick={() => this.props.history.push("/errands-list")}>Back to list</button>
         </div>
     }
 }

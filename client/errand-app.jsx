@@ -17,11 +17,11 @@ export class ErrandApp extends React.Component {
             <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route exact path ="/signup" component={SignUpPage}/>
-                <ProtectedRoute exact path="/main" component={ErrandsListPage} />
-                <ProtectedRoute exact path="/createrequest" component={NewErrandPage}/>
-                <ProtectedRoute exact path="/mypage" component={MyErrandsPage}/>
-                <ProtectedRoute exact path="/request/:id" component={ErrandDetailPage}/>
-                <ProtectedRoute exact path="/myrequest/:id" component={ModifyMyErrandPage}/>
+                <ProtectedRoute exact path="/errands-list" component={ErrandsListPage} />
+                <ProtectedRoute exact path="/create-errand" component={NewErrandPage}/>
+                <ProtectedRoute exact path="/my-errands" component={MyErrandsPage}/>
+                <ProtectedRoute exact path="/errand/:id" component={ErrandDetailPage}/>
+                <ProtectedRoute exact path="/my-errand/:id" component={ModifyMyErrandPage}/>
                 <ProtectedRoute exact path="/user/:email" component={UserProfilePage}/>
             </Switch>
         </div>

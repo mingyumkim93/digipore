@@ -20,10 +20,9 @@ module.exports=function(db){
                 else this.get(data.insertId,cb);
             })
         },
-
         update(req,id,cb){
-            db.paramQuery( `UPDATE errand SET state=?, title=?, explanation=?, runner=?, requestedDayAndTime=?, acceptedDayAndTime=?, location=? where id=${id}`,
-                            [req.state,req.title,req.explanation,req.runner,req.requestedDayAndTime,req.acceptedDayAndTime, req.location],function({error,data}){
+            db.paramQuery( `UPDATE errand SET ? where id=${id}`,
+                            [req],function({error,data}){
                
                 cb(data);
             });

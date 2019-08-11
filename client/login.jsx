@@ -27,7 +27,7 @@ export class LoginPage extends React.Component {
                 if (resp.status == 200) {
                     localStorage.setItem("isAuthenticated", true);
                     localStorage.setItem("currentUser",emailInput);
-                    this.props.history.push("/main");
+                    this.props.history.push("/errands-list");
                 }
             })
             .catch((err) => window.alert("Please check your email or password."));

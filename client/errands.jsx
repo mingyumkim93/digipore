@@ -4,16 +4,17 @@ import {Link} from 'react-router-dom';
 export const Errands = function({errand, currentId}) {
     if (errand.state !== 40) // Show only not terminated requests
         return <tr>
-            {currentId == errand.poster &&
-                <td><Link to={`myrequest/${errand.id}`}>My Errand</Link></td>}
-            {currentId !== errand.poster &&
-                <td><Link to={`request/${errand.id}`}>{errand.id}</Link></td>}
-            <td>{errand.poster}</td>
+            <td><Link to={`user/${errand.poster}`}>{errand.poster}</Link></td>
             <td>{errand.title}</td>
             <td>{errand.location}</td>
             {errand.state == 0 && <td>Waiting for acceptance</td>}
-            {errand.state !== 0 && <td>In processing</td>}
+            {errand.state !== 0 && <td>In progress</td>}
             <td>{errand.requestedDayAndTime}</td>
+            <td>{errand.fee}</td>
+            {currentId == errand.poster &&
+                <td><Link to={`my-errand/${errand.id}`}>Modify</Link></td>}
+            {currentId !== errand.poster &&
+                <td><Link to={`errand/${errand.id}`}>Details</Link></td>}
         </tr>
     else  // Don't show terminated request 
         return <tr></tr>

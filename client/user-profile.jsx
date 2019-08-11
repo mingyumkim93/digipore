@@ -27,9 +27,10 @@ export class UserProfilePage extends React.Component{
         let {user, reviews} = this.state;
         let showReviews = reviews.map(review => <h4>From {review.sender} : {review.comment} {review.stars} stars, Date: {review.date}</h4>)
         return <div>
+            <h3> Phone Number : {user.phone}</h3>
             <h1> {user.firstName} {user.lastName}'s reviews..</h1>
             {showReviews}
-            <button onClick={()=>this.props.history.push("/mypage")}>Back to Mypage</button>
+            <button onClick={()=>this.props.history.goBack()}>Back</button>
         </div>
 
     }

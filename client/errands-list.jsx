@@ -31,18 +31,19 @@ export class ErrandsListPage extends React.Component {
         let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentId={localStorage.getItem("currentUser")}/>)
        
         return <div>
-            <button onClick={()=>this.props.history.push("/createrequest")}> New Errand </button>
-            <button onClick={()=>this.props.history.push("/mypage")}> My Errands </button>
+            <button onClick={()=>this.props.history.push("/create-errand")}> New Errand </button>
+            <button onClick={()=>this.props.history.push("/my-errands")}> My Errands </button>
             <input type="text" id="filter" placeholder="Filter" onChange={e=>this.filterChanged(e)} />
             <table>
                 <thead>
                     <tr>
-                        <td>Number</td>
-                        <td>Requesting User</td>
+                        <td>Poster</td>
                         <td>Title</td>
                         <td>Location</td>
                         <td>State</td>
                         <td>Date</td>
+                        <td>Fee</td>
+                        <td>&nbsp;</td>
                     </tr>
                 </thead>
                 <tbody>

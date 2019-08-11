@@ -53,6 +53,7 @@ const finalizeErrand = (errand) => {
 export const ErrandsIPosted = ({ errand }) => <tr>
     <td>{errand.title}</td>
     <td>{errand.explanation}</td>
+    <td>{errand.fee}</td>
     {errand.state == 0 && <td>Waiting for acceptance</td>}
     {errand.state === 10 && <td>In progress
     <button onClick={() => {
@@ -76,8 +77,8 @@ export const ErrandsIPosted = ({ errand }) => <tr>
             }
         }}>Confirm</button></td>}
     {errand.state == 40 && <td>--DONE--</td>}
-    <td><Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
+    <td>{errand.runner == null && "-"}<Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
     <td>{errand.requestedDayAndTime}</td>
-    <td>{errand.acceptedDayAndTime}</td>
+    <td>{errand.acceptedDayAndTime == null && "-"}{errand.acceptedDayAndTime}</td>
     <td>{errand.location}</td>
 </tr>
