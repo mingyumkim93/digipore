@@ -31,7 +31,7 @@ export class MyErrandsPage extends React.Component {
                 errandsIRun.push(errand);
         });
         let rowsErrandsIPosted = errandsIPosted.map(errand => <ErrandsIPosted
-            errand={errand} key={errand.id} >
+            errand={errand} key={errand.id}>
         </ErrandsIPosted>);
         let rowsErrandsIRun = errandsIRun.map(errand => <ErrandsIRun
             errand={errand} key={errand.id}>

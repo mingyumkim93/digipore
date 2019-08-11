@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const changeErrandToNotAccepted = (errand) => {
     errand.state = 0;
-    errand.providing_user_id = "";
+    errand.runner = "";
     errand.acceptedDayAndTime = "";
     axios.put(`/api/errands/${errand.id}`, errand)
         .then((res) => console.log("Errand has been changed"))
@@ -60,7 +60,7 @@ export const ErrandsIPosted = ({ errand }) => <tr>
             let doubleCheck = confirm("Do you really want to finalize this errand?")
             if (doubleCheck) {
                 posterConfirm(errand);
-                leaveReviewToRunner();
+                leaveReviewToRunner(errand);
             }
         }}>Confirm</button>
         <button onClick={() => {

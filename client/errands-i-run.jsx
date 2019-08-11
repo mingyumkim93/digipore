@@ -72,7 +72,7 @@ export const ErrandsIRun = ({ errand }) => <tr>
             let doubleCheck = confirm("Do you really want to finalize this errand?")
             if (doubleCheck) {
                 finalizeErrand(errand);
-                leaveReviewToPoster();
+                leaveReviewToPoster(errand);
             }
         }}>Confirm</button></td>}
     {errand.state == 30 && <td>You confirmed. Waiting for poster confirm..</td>}
