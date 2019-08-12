@@ -81,7 +81,7 @@ export const ErrandsIRun = ({ errand, updateMyErrandsList }) => <tr>
             }
         }}>Confirm</button></td>}
     {errand.state == 30 && <td>You confirmed. Waiting for poster confirm..</td>}
-    {errand.state == 40 && <td>--DONE--</td>}
+    {errand.state == 40 && <td>Done</td>}
     <td><Link to={`user/${errand.poster}`}>{errand.poster}</Link></td>
     <td>{errand.requestedDayAndTime}</td>
     <td>{errand.acceptedDayAndTime}</td>

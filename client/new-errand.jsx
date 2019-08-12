@@ -47,7 +47,7 @@ export class NewErrandPage extends React.Component {
     return <div>
       <input type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
       <input type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
-      <input type="text" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
+      <input type="number" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
       <textarea type="text" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
       <button onClick={() => {
         this.createErrand();

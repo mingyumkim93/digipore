@@ -81,7 +81,7 @@ export const ErrandsIPosted = ({ errand, updateMyErrandsList}) => <tr>
                 updateMyErrandsList(true);
             }
         }}>Confirm</button></td>}
-    {errand.state == 40 && <td>--DONE--</td>}
+    {errand.state == 40 && <td>Done</td>}
     <td>{errand.runner == null && "-"}<Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
     <td>{errand.requestedDayAndTime}</td>
     <td>{errand.acceptedDayAndTime == null && "-"}{errand.acceptedDayAndTime}</td>

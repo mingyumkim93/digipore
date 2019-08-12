@@ -9,6 +9,7 @@ import { MyErrandsPage } from './my-errands';
 import { ErrandDetailPage } from './errand-detail';
 import { ModifyMyErrandPage } from './modify-my-errand';
 import { UserProfilePage } from './user-profile';
+import { CreateOfferPage} from'./create-offer';
 
 export class ErrandApp extends React.Component {
 
@@ -23,6 +24,7 @@ export class ErrandApp extends React.Component {
                 <ProtectedRoute exact path="/errand/:id" component={ErrandDetailPage}/>
                 <ProtectedRoute exact path="/my-errand/:id" component={ModifyMyErrandPage}/>
                 <ProtectedRoute exact path="/user/:email" component={UserProfilePage}/>
+                <ProtectedRoute exact path="/create-offer/:id" component={CreateOfferPage}/>
             </Switch>
         </div>
 

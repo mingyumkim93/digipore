@@ -47,6 +47,10 @@ export class ModifyMyErrandPage extends React.Component {
             window.alert("You can't empty location!");
             return;
         }
+        if (!this.state.newFee) {
+            window.alert("You can't empty fee!");
+            return;
+        }
         let errandId = this.props.match.params.id;
         let newErrand = this.state.errand;
         newErrand.title = this.state.newTitle;
@@ -66,7 +70,7 @@ export class ModifyMyErrandPage extends React.Component {
         return <div>
             <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle}/>
             <input onChange={ev=> this.textChanged(ev)} type="text" id="newLocation" value={newLocation}/>
-            <input onChange={ev=> this.textChanged(ev)} type="text" id="newFee" value={newFee}/>
+            <input onChange={ev=> this.textChanged(ev)} type="number" id="newFee" placeholder="Fee"/>
             
             <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation}/>
             <button onClick={() => {

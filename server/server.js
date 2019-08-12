@@ -21,11 +21,13 @@ app.use(passport.session());
 let db = require("./mysqlhelper");
 let errandApi = require("./errandapi");
 let userApi = require('./userapi');
-let reviewApi = require('./reviewapi')
+let reviewApi = require('./reviewapi');
+let offerApi = require("./offerapi")
 
 errandApi(app, db);
 userApi(app, db, passport, LocalStrategy);
 reviewApi(app, db);
+offerApi(app, db)
 
 app.listen(9000);
 
