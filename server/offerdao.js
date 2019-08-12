@@ -5,6 +5,13 @@ module.exports=function(db){
                 if(err) cb(err)
                 cb(data)
             })
+        },
+
+        getOffersByErrandId(errandId,cb){
+            db.paramQuery("select * from offer where errand_id=?",[errandId],function({err,data}){
+                if(err) cb(err)
+                cb({data})
+            })
         }
     }
 }
