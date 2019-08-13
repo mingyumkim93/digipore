@@ -39,7 +39,8 @@ export class CreateOfferPage extends React.Component{
             message:this.state.message,
             date:now,
             errand_id:this.state.errand.id,
-            fee:this.state.fee
+            fee:this.state.fee,
+            state:0
         }
         axios.post('/api/offer',offer)
         .then(res=>{

@@ -42,7 +42,7 @@ module.exports = function (app, db, passport, LocalStrategy) {
     app.post('/login',
         passport.authenticate('local'), function (req, res) {
             console.log("authentication is done successfully");
-            res.redirect("/main")
+            res.redirect("/errands-list")
         });
 
     app.get('/api/user/:email',function(req,res){
@@ -63,4 +63,5 @@ module.exports = function (app, db, passport, LocalStrategy) {
             }
         })
     });
+    
 }

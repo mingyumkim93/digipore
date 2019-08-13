@@ -9,7 +9,7 @@ export class ModifyMyErrandPage extends React.Component {
             errand: {},
             newTitle: "",
             newExplanation: "",
-            newLocation:"",
+            newLocation: "",
             newFee: 0
         }
     }
@@ -17,11 +17,18 @@ export class ModifyMyErrandPage extends React.Component {
     getErrandFromDB(errandId) {
         axios.get(`/api/errands/${errandId}`).then(res => {
             const errand = res.data;
-            this.setState({ errand });
-            this.setState({newTitle : errand.title})
-            this.setState({newExplanation : errand.explanation})
-            this.setState({newLocation:errand.location})
-            this.setState({newFee:errand.fee})
+            if (errand.state !== 0) {
+                alert("You can't modify errand in process");
+                this.props.history.push("/errands-list")
+            }
+            else {
+                this.setState({ errand });
+                this.setState({ newTitle: errand.title })
+                this.setState({ newExplanation: errand.explanation })
+                this.setState({ newLocation: errand.location })
+                this.setState({ newFee: errand.fee })
+            }
+
         });
     }
 
@@ -33,7 +40,7 @@ export class ModifyMyErrandPage extends React.Component {
     textChanged(ev) {
         this.setState({ [ev.target.id]: ev.target.value });
     }
-    
+
     modifyErrand() {
         if (!this.state.newTitle) {
             window.alert("You can't empty title!");
@@ -57,22 +64,22 @@ export class ModifyMyErrandPage extends React.Component {
         newErrand.explanation = this.state.newExplanation;
         newErrand.location = this.state.newLocation;
         newErrand.fee = this.state.newFee;
-        axios.put(`/api/errands/${errandId}`,newErrand).then(()=>this.props.history.push("/errands-list"));
+        axios.put(`/api/errands/${errandId}`, newErrand).then(() => this.props.history.push("/errands-list"));
     }
 
-    deleteErrand(){
+    deleteErrand() {
         let errandId = this.props.match.params.id;
-        axios.delete(`/api/errands/${errandId}`).then(()=>this.props.history.push("/errands-list"))
+        axios.delete(`/api/errands/${errandId}`).then(() => this.props.history.push("/errands-list"))
     }
 
     render() {
-        let {newTitle, newExplanation, newLocation, newFee} = this.state;
+        let { newTitle, newExplanation, newLocation, newFee } = this.state;
         return <div>
-            <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle}/>
-            <input onChange={ev=> this.textChanged(ev)} type="text" id="newLocation" value={newLocation}/>
-            <input onChange={ev=> this.textChanged(ev)} type="number" id="newFee" placeholder="Fee"/>
-            
-            <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation}/>
+            <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
+            <input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
+            <input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
+
+            <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation} />
             <button onClick={() => {
                 this.modifyErrand();
             }}>modify</button>

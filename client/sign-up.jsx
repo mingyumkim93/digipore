@@ -11,7 +11,7 @@ export class SignUpPage extends React.Component{
             password:"",
             firstName:"",
             lastName:"",
-            phone:""
+            phone:null
         }
     }
 
@@ -21,7 +21,7 @@ export class SignUpPage extends React.Component{
 
     signUp(){
         let {id, firstName, lastName, email, password, phone} = this.state;
-        if(!(email&&password&&firstName&&lastName)) {
+        if(!(email&&password&&firstName&&lastName&phone)) {
             window.alert("Please fill every fields!");
             return;
         }

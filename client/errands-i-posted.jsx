@@ -76,11 +76,13 @@ export class ErrandsIPosted extends React.Component{
     render(){
         let errand = this.props.errand;
         let offers = this.state.offers;
+        let stateZeroOffers = [];
+        offers.map(offer => {if(offer.state==0)stateZeroOffers.push(offer)});
         return<tr>
         <td>{errand.title}</td>
         <td>{errand.explanation}</td>
         <td>{errand.fee}</td>
-        {errand.state == 0 && <td><Link  to={`/see-offers/${errand.id}`}>See offer ({offers.length})</Link></td>}
+        {errand.state == 0 && <td><Link  to={`/see-offers/${errand.id}`}>See offer ({stateZeroOffers.length})</Link></td>}
         {errand.state == 10 && <td>In progress
         <button onClick={() => {
                 let doubleCheck = confirm("Do you really want to finalize this errand?")
@@ -108,9 +110,9 @@ export class ErrandsIPosted extends React.Component{
                 }
             }}>Confirm</button></td>}
         {errand.state == 40 && <td>Done</td>}
-        <td>{errand.runner == null && "-"}<Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
+        <td>{errand.runner == "" && "-"}<Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
         <td>{errand.requestedDayAndTime}</td>
-        <td>{errand.acceptedDayAndTime == null && "-"}{errand.acceptedDayAndTime}</td>
+        <td>{errand.acceptedDayAndTime == "" && "-"}{errand.acceptedDayAndTime}</td>
         <td>{errand.location}</td>
     </tr>
     

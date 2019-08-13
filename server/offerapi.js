@@ -11,4 +11,10 @@ module.exports = function (app, db){
             res.json(data);
         })
     })
+
+    app.put('/api/offer/:id',function(req,res){
+        dao.updateOffer(req.body,req.params.id,function({err,data}){
+            res.json(data);
+        })
+    })
 }

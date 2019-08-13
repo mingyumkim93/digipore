@@ -12,6 +12,13 @@ module.exports=function(db){
                 if(err) cb(err)
                 cb({data})
             })
+        },
+
+        updateOffer(updatedOffer,id,cb){
+            db.paramQuery(`update offer set ? where id=${id}`,updatedOffer,function({err,data}){
+                if(err) cb(err)
+                cb({data})
+            })
         }
     }
 }

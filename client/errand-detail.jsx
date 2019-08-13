@@ -22,16 +22,16 @@ export class ErrandDetailPage extends React.Component {
         if (errandId) this.getErrandFromDB(errandId);
     }
 
-    runErrand(){ //todo : remove
+    runErrand() { //todo : remove
         let doubleCheck = confirm("Do you really want to run this errand?")
-        if(doubleCheck){
+        if (doubleCheck) {
             var d = new Date();
             let now = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
             let updatedErrand = this.state.errand;
-            updatedErrand.state=10;
+            updatedErrand.state = 10;
             updatedErrand.runner = localStorage.getItem("currentUser");
-            updatedErrand.acceptedDayAndTime=now;
-            axios.put(`/api/errands/${updatedErrand.id}`,updatedErrand).then(res=>{
+            updatedErrand.acceptedDayAndTime = now;
+            axios.put(`/api/errands/${updatedErrand.id}`, updatedErrand).then(res => {
                 this.props.history.push("/errands-list");
             });
         }
@@ -40,12 +40,12 @@ export class ErrandDetailPage extends React.Component {
 
 
     render() {
-        let {errand} = this.state;
+        let { errand } = this.state;
         return <div> <h2>{this.state.errand.explanation}</h2>
-        {this.state.errand.state==0 && <button onClick={()=>this.props.history.push(`/create-offer/${errand.id}`)}>Create Offer</button>}
-        <button onClick={()=>this.props.history.push("/errands-list")}>
-            Back to list
-        </button>
+            {this.state.errand.state == 0 && <button onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>Create Offer</button>}
+            <button onClick={() => this.props.history.push("/errands-list")}>
+                Back to list
+            </button>
         </div>
     }
 }

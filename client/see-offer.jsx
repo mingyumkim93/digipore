@@ -43,7 +43,10 @@ export class SeeOfferPage extends React.Component {
 
     render() {
         let { offers, errand } = this.state;
-        let rows = offers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
+        let stateZeroOffers = [];
+        offers.map(offer => {if(offer.state==0)stateZeroOffers.push(offer)});
+        let rows = stateZeroOffers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
+        if(offers.length==0)return <h1>There is no offer..</h1>
         return <div><table>
             <thead>
                 <tr>
