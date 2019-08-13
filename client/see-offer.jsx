@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Offer} from './offers';
+import { Offer } from './offers';
 
 export class SeeOfferPage extends React.Component {
 
@@ -9,12 +9,12 @@ export class SeeOfferPage extends React.Component {
         this.state = {
             offers: [],
             errand: {},
-            moveToMyErrands:false
+            moveToMyErrands: false
         },
-        this.moveToMyErrands = this.moveToMyErrands.bind(this)
+            this.moveToMyErrands = this.moveToMyErrands.bind(this)
     }
 
-    moveToMyErrands(){
+    moveToMyErrands() {
         this.props.history.push("/my-errands")
     }
 
@@ -44,20 +44,27 @@ export class SeeOfferPage extends React.Component {
     render() {
         let { offers, errand } = this.state;
         let stateZeroOffers = [];
-        offers.map(offer => {if(offer.state==0)stateZeroOffers.push(offer)});
+        offers.map(offer => { if (offer.state == 0) stateZeroOffers.push(offer) });
         let rows = stateZeroOffers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
-        if(offers.length==0)return <h1>There is no offer..</h1>
-        return <div><table>
-            <thead>
-                <tr>
-                    <td>From</td>
-                    <td>Message</td>
-                    <td>Fee</td>
-                    <td>When</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </thead>
-            <thead>{rows}</thead>
-        </table></div>
+        if (offers.length == 0) return <h1>There is no offer..</h1>
+        if (errand.poster == localStorage.getItem("currentUser")) {
+            return <div><table>
+                <thead>
+                    <tr>
+                        <td>From</td>
+                        <td>Message</td>
+                        <td>Fee</td>
+                        <td>When</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </thead>
+                <thead>{rows}</thead>
+            </table></div>
+        }
+        else {
+            return <div>
+                <h1>You can't access this page</h1>
+            </div>
+        }
     }
 }

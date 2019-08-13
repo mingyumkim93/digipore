@@ -52,6 +52,8 @@ export class CreateOfferPage extends React.Component{
     }
 
     render(){
+        if(this.state.errand.poster == localStorage.getItem("currentUser"))
+        return <div><h1>You can't offer to your errand</h1></div>
         return <div>
             <textarea type="text" id="message" placeholder="message" onChange={(ev)=>this.textChanged(ev)}/>
             <input type="number" id="fee" placeholder="Fee" onChange={(ev)=>this.textChanged(ev)}/>

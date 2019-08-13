@@ -73,21 +73,28 @@ export class ModifyMyErrandPage extends React.Component {
     }
 
     render() {
-        let { newTitle, newExplanation, newLocation, newFee } = this.state;
-        return <div>
-            <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
-            <input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
-            <input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
+        let { newTitle, newExplanation, newLocation,errand } = this.state;
 
-            <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation} />
-            <button onClick={() => {
-                this.modifyErrand();
-            }}>modify</button>
-            <button onClick={() => {
-                this.deleteErrand();
-            }}>delete</button>
-            <button onClick={() => this.props.history.push("/errands-list")}>cancel</button>
+        if (errand.poster == localStorage.getItem("currentUser")) {
+            return <div>
+                <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
+                <input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
+                <input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
 
-        </div>
+                <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation} />
+                <button onClick={() => {
+                    this.modifyErrand();
+                }}>modify</button>
+                <button onClick={() => {
+                    this.deleteErrand();
+                }}>delete</button>
+                <button onClick={() => this.props.history.push("/errands-list")}>cancel</button>
+            </div>
+        }
+        else {
+            return <div>
+                <h1>You can't access this page</h1>
+            </div>
+        }
     }
 }
