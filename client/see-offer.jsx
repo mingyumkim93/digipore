@@ -15,7 +15,7 @@ export class SeeOfferPage extends React.Component {
     }
 
     moveToMyErrands() {
-        this.props.history.push("/my-errands")
+        this.props.history.push("/my-errands-list")
     }
 
     getOffersToThisErrand(errandId) {

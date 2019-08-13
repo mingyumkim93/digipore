@@ -32,7 +32,7 @@ export class ErrandsListPage extends React.Component {
        
         return <div>
             <button onClick={()=>this.props.history.push("/create-errand")}> New Errand </button>
-            <button onClick={()=>this.props.history.push("/my-errands")}> My Errands </button>
+            <button onClick={()=>this.props.history.push("/my-errands-list")}> My Errands </button>
             <input type="text" id="filter" placeholder="Filter" onChange={e=>this.filterChanged(e)} />
             <table>
                 <thead>
