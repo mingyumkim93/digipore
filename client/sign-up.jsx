@@ -11,7 +11,8 @@ export class SignUpPage extends React.Component{
             password:"",
             firstName:"",
             lastName:"",
-            phone:null
+            phone:null,
+            role:0
         }
     }
 
@@ -20,12 +21,12 @@ export class SignUpPage extends React.Component{
     }
 
     signUp(){
-        let {id, firstName, lastName, email, password, phone} = this.state;
-        if(!(email&&password&&firstName&&lastName&phone)) {
+        let {id, firstName, lastName, email, password, phone, role} = this.state;
+        if(!(email&&password&&firstName&&lastName&&phone)) {
             window.alert("Please fill every fields!");
             return;
         }
-        axios.post("/api/user", { id, firstName, lastName, email, password, phone})
+        axios.post("/api/user", { id, firstName, lastName, email, password, phone, role})
             .then((res) => {
                 if(res.status==200){
                     window.alert("You signed up successfully. Move to login page.");

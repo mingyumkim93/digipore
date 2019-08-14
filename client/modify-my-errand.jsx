@@ -10,7 +10,8 @@ export class ModifyMyErrandPage extends React.Component {
             newTitle: "",
             newExplanation: "",
             newLocation: "",
-            newFee: 0
+            newFee: 0,
+            currentUserRole:0
         }
     }
 
@@ -28,13 +29,21 @@ export class ModifyMyErrandPage extends React.Component {
                 this.setState({ newLocation: errand.location })
                 this.setState({ newFee: errand.fee })
             }
-
         });
     }
 
     componentDidMount() {
         let errandId = this.props.match.params.id;
         if (errandId) this.getErrandFromDB(errandId);
+        this.getCurrentUserRole()
+    }
+    getCurrentUserRole(){
+        axios.get(`/api/user/${localStorage.getItem("currentUser")}`)
+        .then(res=>{
+            let currentUserRole = res.data.role;
+            this.setState({currentUserRole});
+        })
+        .catch(err=>console.log(err));
     }
 
     textChanged(ev) {
@@ -73,14 +82,13 @@ export class ModifyMyErrandPage extends React.Component {
     }
 
     render() {
-        let { newTitle, newExplanation, newLocation,errand } = this.state;
+        let { newTitle, newExplanation, newLocation, errand } = this.state;
 
-        if (errand.poster == localStorage.getItem("currentUser")) {
+        if ((errand.poster == localStorage.getItem("currentUser")) || this.state.currentUserRole == 10) {
             return <div>
                 <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
                 <input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
                 <input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
-
                 <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation} />
                 <button onClick={() => {
                     this.modifyErrand();

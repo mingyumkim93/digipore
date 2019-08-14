@@ -22,6 +22,11 @@ module.exports=function(db){
                 if(error) cb({error});
                 else cb({data});
             })
+        },
+        updateUser(user, cb){
+            db.paramQuery(`UPDATE user SET ? where id=${user.id}`,[user],function({err,data}){
+                cb({data});
+            })
         }
     }
 }

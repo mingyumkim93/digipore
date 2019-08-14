@@ -52,6 +52,12 @@ module.exports = function (app, db, passport, LocalStrategy) {
         })
     });
 
+    app.put('/api/user/:email',function(req,res){
+        dao.updateUser(req.body, function({err,data}){
+            res.json(data);
+        })
+    })
+
     app.post("/api/user",(req,res)=>{
         dao.getUserByEmail(req.body.email, function({err, data}){
             if (err) res.send(err);
