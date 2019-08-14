@@ -1,20 +1,36 @@
-module.exports = function (app, db){
+module.exports = function (app, db) {
     let dao = require("./offerdao")(db);
-    app.post("/api/offer",function(req,res){
-        dao.createOffer(req.body, function({err,data}){
-            res.json(data);
-        })
-    });
 
-    app.get('/api/offer/:id',function(req,res){
-        dao.getOffersByErrandId(req.params.id,function({err,data}){
-            res.json(data);
-        })
-    })
+    let createOffer = function (req, res) {
+        if (req.session.passport) {
+            dao.createOffer(req.body, function ({ err, data }) {
+                res.json(data);
+            });
+        }
+        else
+            resp.send(404);
+    };
+    app.post("/api/offer", createOffer);
 
-    app.put('/api/offer/:id',function(req,res){
-        dao.updateOffer(req.body,req.params.id,function({err,data}){
-            res.json(data);
-        })
-    })
+    let getOffersByErrandId = function (req, res) {
+        if (req.session.passport) {
+            dao.getOffersByErrandId(req.params.id, function ({ err, data }) {
+                res.json(data);
+            });
+        }
+        else
+            resp.send(404);
+    };
+    app.get('/api/offer/:id', getOffersByErrandId);
+
+    let updateOffer = function (req, res) {
+        if (req.session.passport) {
+            dao.updateOffer(req.body, req.params.id, function ({ err, data }) {
+                res.json(data);
+            });
+        }
+        else
+            resp.send(404);
+    };
+    app.put('/api/offer/:id', updateOffer);
 }

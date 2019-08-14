@@ -63,5 +63,10 @@ module.exports = function (app, db, passport, LocalStrategy) {
             }
         })
     });
+
+    app.get("/logout",(req,res)=>{
+        if(req.session)
+            req.session.destroy(err=>console.log(err));
+    })
     
 }

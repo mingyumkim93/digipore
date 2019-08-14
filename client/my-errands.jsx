@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {ErrandsIPosted} from './errands-i-posted';
 import {ErrandsIRun} from './errands-i-run';
-export class MyErrandsPage extends React.Component {
+export class MyErrandsListPage extends React.Component {
 
     constructor(props) {
         super(props);

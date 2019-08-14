@@ -14,7 +14,7 @@ export class ErrandsListPage extends React.Component {
     getErrandsFromDB(){
          axios.get('/api/errands').then(res=>{
             const errands = res.data;
-            this.setState({errands: errands});
+            this.setState({errands});
         });
     }
     componentDidMount(){
@@ -23,6 +23,10 @@ export class ErrandsListPage extends React.Component {
 
     filterChanged(e){
         this.setState({ [e.target.id]: e.target.value });
+    }
+
+    logout(){
+        axios.get("/logout").then(res=>console.log("Logout")).catch(err=>console.log(err));
     }
 
     render() {
@@ -52,9 +56,10 @@ export class ErrandsListPage extends React.Component {
             </table>
             <button onClick={()=>{
                 localStorage.clear();
+                this.logout();
                 this.props.history.push("/");
             }}>Logout</button>
-            
+            <button onClick={()=>this.logout()}>Test:Destroy session</button>
         </div>
 
     }

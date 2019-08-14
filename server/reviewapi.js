@@ -1,18 +1,29 @@
+
 module.exports = function (app, db) {
 
     let dao = require("./reviewdao")(db);
-    app.post("/api/review",(req,res)=>{
-        dao.createReview(req.body, function({err, data}){
-            if (err) res.send(err);
-            res.json(data);
-        })
-    });
 
-    app.get("/api/review/:email",function(req,res){
-        dao.getReviewByEmail(req.params.email,function({err,data}){
-            if(err) res.send(err);
-            res.json(data);
-        })
+    let createReview = function (req, res) {
+        if (req.session.passport) {
+            dao.createReview(req.body, function ({ err, data }) {
+                if (err) res.send(err);
+                res.json(data);
+            });
+        }
+        else
+            resp.send(404);
+    };
+    app.post("/api/review", createReview);
 
-    });
+    let getReviewByEmail = function (req, res) {
+        if (req.session.passport) {
+            dao.getReviewByEmail(req.params.email, function ({ err, data }) {
+                if (err) res.send(err);
+                res.json(data);
+            });
+        }
+        else
+            resp.send(404);
+    };
+    app.get("/api/review/:email", getReviewByEmail);
 }
