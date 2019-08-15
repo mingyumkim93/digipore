@@ -1,4 +1,4 @@
-module.exports = function (app, db, passport, LocalStrategy) {
+module.exports = function (app, db, passport, LocalStrategy, bcrypt) {
 
     let dao = require("./userdao")(db);
     dao.getAllUsers(function ({ error, data }) {
@@ -23,18 +23,24 @@ module.exports = function (app, db, passport, LocalStrategy) {
         passwordField: 'passwordInput'
     },
         function (username, password, done) {
+
             dao.getUserByEmail(username, function ({ error, data }) {
                 if (error) return done(error);
                 if (!data[0]) {
                     console.log("Incorrect email!");
                     return done(null, false, { message: 'Incorrect email.' })
                 }
-                else if (password !== data[0].password) {
-                    console.log("Incorrect password!");
-                    return done(null, false, { message: 'Incorrect password.' })
+                bcrypt.compare(password, data[0].password, function (err, result) {
+                    if (result == true) {
+                        console.log("all clear")
+                        return done(null, data[0])
+                    }
+                    else {
+                        //console.log("Incorrect password!");
+                        return done(null, false, { message: 'Incorrect password.' })
+                    }
                 }
-                console.log("all clear")
-                return done(null, data[0])
+                )
             })
         }
     ));
@@ -45,34 +51,47 @@ module.exports = function (app, db, passport, LocalStrategy) {
             res.redirect("/errands-list")
         });
 
-    app.get('/api/user/:email',function(req,res){
-        dao.getUserByEmail(req.params.email,function({err, data}){
+    app.get('/api/user/:email', function (req, res) {
+        dao.getUserByEmail(req.params.email, function ({ err, data }) {
             delete data[0].password;
             res.json(data[0]);
         })
     });
 
-    app.put('/api/user/:email',function(req,res){
-        dao.updateUser(req.body, function({err,data}){
-            res.json(data);
+    app.put('/api/user/:email', function (req, res) {
+        let saltRounds = 10;
+        bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+            if (err) res.send(err);
+            req.body.password = hash;
+            dao.updateUser(req.body, function ({ err, data }) {
+                if (err) res.send(err)
+                res.sendStatus(200);
+            })
         })
+
     })
 
-    app.post("/api/user",(req,res)=>{
-        dao.getUserByEmail(req.body.email, function({err, data}){
+    app.post("/api/user", (req, res) => {
+        dao.getUserByEmail(req.body.email, function ({ err, data }) {
             if (err) res.send(err);
             if (data[0]) res.send(404);
             else {
-                dao.createUser(req.body, function ({ err, data }) {
-                    res.sendStatus(200);
+                let saltRounds = 10;
+                bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+                    if (err) res.send(err);
+                    req.body.password = hash
+                    dao.createUser(req.body, function ({ err, data }) {
+                        if (err) res.send(err)
+                        res.sendStatus(200);
+                    });
                 });
             }
         })
     });
 
-    app.get("/logout",(req,res)=>{
-        if(req.session)
-            req.session.destroy(err=>console.log(err));
+    app.get("/logout", (req, res) => {
+        if (req.session)
+            req.session.destroy(err => console.log(err));
     })
-    
+
 }

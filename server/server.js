@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
+var bcrypt = require("bcrypt");
 app.use(express.static("../wwwroot"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +26,7 @@ let reviewApi = require('./reviewapi');
 let offerApi = require("./offerapi")
 
 errandApi(app, db);
-userApi(app, db, passport, LocalStrategy);
+userApi(app, db, passport, LocalStrategy, bcrypt);
 reviewApi(app, db);
 offerApi(app, db)
 
