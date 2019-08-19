@@ -8,7 +8,10 @@ export const Errands = function({errand, currentId, role}) {
             <td>{errand.title}</td>
             <td>{errand.location}</td>
             {errand.state == 0 && <td>Waiting for acceptance</td>}
-            {errand.state !== 0 && <td>In progress</td>}
+            {errand.state == 10 && <td>In progress</td>}
+            {errand.state == 20 && <td>In progress</td>}
+            {errand.state == 30 && <td>In progress</td>}
+            {errand.state == 40 && <td>Done</td>}
             <td>{errand.requestedDayAndTime}</td>
             <td>{errand.fee}</td>
             <td><Link to={`my-errand/${errand.id}`}>Modify</Link></td>

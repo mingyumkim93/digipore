@@ -7,7 +7,7 @@ module.exports = function (app, db) {
             });
         }
         else
-            resp.send(404);
+            resp.sendStatus(404);
     };
     app.get("/api/errands", getAllErrands);
 
@@ -19,7 +19,7 @@ module.exports = function (app, db) {
             });
         }
         else
-            resp.send(404);
+            resp.sendStatus(404);
     };
     app.get("/api/errands/:id", getErrand);
 
@@ -30,7 +30,7 @@ module.exports = function (app, db) {
             });
         }
         else
-            resp.send(404);
+            resp.sendStatus(404);
     };
     app.post("/api/errands", postErrand);
 
@@ -41,7 +41,7 @@ module.exports = function (app, db) {
             });
         }
         else
-            resp.send(404);
+            resp.sendStatus(404);
     };
     app.put("/api/errands/:id", updataErrand);
 
@@ -52,7 +52,7 @@ module.exports = function (app, db) {
             });
         }
         else
-            resp.send(404);
+            resp.sendStatus(404);
     };
     app.delete("/api/errands/:id", deleteErrand);
 

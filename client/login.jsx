@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'reactstrap'
 
 export class LoginPage extends React.Component {
     constructor(props) {
@@ -13,12 +14,12 @@ export class LoginPage extends React.Component {
 
     sendLoginRequest(emailInput, passwordInput) {
         if (!emailInput) {
-            window.alert("Put your email.");
+            alert("Put your email.");
             return;
         }
 
         if (!passwordInput) {
-            window.alert("Put you password.");
+            alert("Put you password.");
             return;
         }
 
@@ -30,7 +31,7 @@ export class LoginPage extends React.Component {
                     this.props.history.push("/errands-list");
                 }
             })
-            .catch((err) => window.alert("Please check your email or password."));
+            .catch((err) => alert("Please check your email or password."));
     }
 
     render() {
@@ -38,10 +39,10 @@ export class LoginPage extends React.Component {
         return <div>
             <input type="text" id="emailInput" name="emailInput" placeholder="Email" onChange={ev => this.textChanged(ev)} />
             <input type="password" id="passwordInput" name="passwordInput" placeholder="Password" onChange={ev => this.textChanged(ev)} />
-            <button onClick={
+            <Button color="primary" onClick={
                 () => this.sendLoginRequest(emailInput, passwordInput)}
-            >Login</button>
-            <button onClick={()=>this.props.history.push("/signup")} >Sign Up</button>
+            >Login</Button>
+            <Button color="primary" onClick={()=>this.props.history.push("/signup")} >Sign Up</Button>
         </div>
     }
 }

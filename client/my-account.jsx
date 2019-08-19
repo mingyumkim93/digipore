@@ -55,7 +55,7 @@ export class MyAccountPage extends React.Component{
             <input onChange={(e)=>this.textChanged(e)} type="text" id="newFirstName" value={this.state.newFirstName}></input>
             <input onChange={(e)=>this.textChanged(e)} type="text" id="newLastName" value={this.state.newLastName}></input>
             <input onChange={(e)=>this.textChanged(e)} type="text" id="newPhone" value={this.state.newPhone}></input>
-            <input onChange={(e)=>this.textChanged(e)} type="password" id="newPassword"/>
+            <input onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
             <button onClick={()=>this.updateAccount()}>Change</button>
             <button onClick={()=>this.props.history.goBack()}>Back</button>
         </div>
