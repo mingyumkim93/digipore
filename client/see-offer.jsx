@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Offer } from './offers';
-
+import { Table } from 'reactstrap';
 export class SeeOfferPage extends React.Component {
 
     constructor(props) {
@@ -48,7 +48,7 @@ export class SeeOfferPage extends React.Component {
         let rows = stateZeroOffers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
         if (offers.length == 0) return <h1>There is no offer..</h1>
         if (errand.poster == localStorage.getItem("currentUser")) {
-            return <div><table>
+            return <div><Table>
                 <thead>
                     <tr>
                         <td>From</td>
@@ -59,7 +59,7 @@ export class SeeOfferPage extends React.Component {
                     </tr>
                 </thead>
                 <thead>{rows}</thead>
-            </table></div>
+            </Table></div>
         }
         else {
             return <div>

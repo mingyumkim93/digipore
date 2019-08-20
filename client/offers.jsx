@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 
 export class Offer extends React.Component {
     constructor(props) {
@@ -31,12 +32,12 @@ export class Offer extends React.Component {
             <td>{offer.message}</td>
             <td>{offer.fee}</td>
             <td>{offer.date}</td>
-            <td><button onClick={() => {
+            <td><Button outline color="primary" onClick={() => {
                 let doubleCheck = confirm("Do you really want to accept this offer?");
                 if (doubleCheck) {
                     this.acceptOffer(errand, offer)
                 }
-            }}>ACCEPT</button></td>
+            }}>ACCEPT</Button></td>
         </tr>
     }
 

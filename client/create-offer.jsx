@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Input, Button} from 'reactstrap';
 
 export class CreateOfferPage extends React.Component{
 
@@ -55,10 +56,10 @@ export class CreateOfferPage extends React.Component{
         if(this.state.errand.poster == localStorage.getItem("currentUser"))
         return <div><h1>You can't offer to your errand</h1></div>
         return <div>
-            <textarea type="text" id="message" placeholder="message" onChange={(ev)=>this.textChanged(ev)}/>
-            <input type="number" id="fee" placeholder="Fee" onChange={(ev)=>this.textChanged(ev)}/>
-            <button onClick={()=>this.sendOffer()}>Send</button>
-            <button onClick={()=>this.props.history.goBack()}>Back</button>
+            <Input type="textarea" id="message" placeholder="message" onChange={(ev)=>this.textChanged(ev)}/>
+            <Input type="number" id="fee" placeholder="Fee" onChange={(ev)=>this.textChanged(ev)}/>
+            <Button outline color="primary" onClick={()=>this.sendOffer()}>Send</Button>
+            <Button outline color="primary" onClick={()=>this.props.history.goBack()}>Back</Button>
         </div>
     }
 }

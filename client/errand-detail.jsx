@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import {Button} from 'reactstrap';
 export class ErrandDetailPage extends React.Component {
 
     constructor(props) {
@@ -42,10 +42,10 @@ export class ErrandDetailPage extends React.Component {
     render() {
         let { errand } = this.state;
         return <div> <h2>{this.state.errand.explanation}</h2>
-            {this.state.errand.state == 0 && <button onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>Create Offer</button>}
-            <button onClick={() => this.props.history.push("/errands-list")}>
+            {this.state.errand.state == 0 && <Button outline color ="primary" onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>Create Offer</Button>}
+            <Button outline color ="primary" onClick={() => this.props.history.push("/errands-list")}>
                 Back to list
-            </button>
+            </Button>
         </div>
     }
 }

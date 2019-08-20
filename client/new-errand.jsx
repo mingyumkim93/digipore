@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Button, Input} from 'reactstrap';
 export class NewErrandPage extends React.Component {
 
   constructor(props) {
@@ -45,14 +46,14 @@ export class NewErrandPage extends React.Component {
 
   render() {
     return <div>
-      <input type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
-      <input type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
-      <input type="number" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
-      <textarea type="text" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
-      <button onClick={() => {
+      <Input type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
+      <Input type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
+      <Input type="number" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
+      <Input type="textarea" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
+      <Button outline color ="primary" onClick={() => {
         this.createErrand();
-      }}>Post</button>
-      <button onClick={() => this.props.history.push("/errands-list")}>Cancel</button>
+      }}>Post</Button>
+      <Button outline color ="primary"  onClick={() => this.props.history.push("/errands-list")}>Cancel</Button>
     </div>
   }
 }

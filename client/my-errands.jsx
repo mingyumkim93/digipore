@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {ErrandsIPosted} from './errands-i-posted';
 import {ErrandsIRun} from './errands-i-run';
+import {Button, Table, Label} from 'reactstrap';
 export class MyErrandsListPage extends React.Component {
 
     constructor(props) {
@@ -43,8 +44,8 @@ export class MyErrandsListPage extends React.Component {
         </ErrandsIRun>);
         return <div>
             <div>
-                <label>Errands you posted</label>
-                <table>
+                <Label>Errands you posted</Label>
+                <Table>
                     <thead>
                         <tr>
                             <td>Title</td>
@@ -58,13 +59,13 @@ export class MyErrandsListPage extends React.Component {
                         </tr>
                     </thead>
                     <tbody>{rowsErrandsIPosted}</tbody>
-                </table>
+                </Table>
             </div>
             <br />
             <br />
             <div>
-                <label>Errands you are running / Errands you have run</label>
-                <table>
+                <Label>Errands you are running / Errands you have run</Label>
+                <Table>
                     <thead>
                         <tr>
                             <td>Title</td>
@@ -78,9 +79,9 @@ export class MyErrandsListPage extends React.Component {
                         </tr>
                     </thead>
                     <tbody>{rowsErrandsIRun}</tbody>
-                </table>
+                </Table>
             </div>
-            <button onClick={() => this.props.history.push("/errands-list")}>Back to list</button>
+            <Button outline color ="primary" onClick={() => this.props.history.push("/errands-list")}>Back to list</Button>
         </div>
     }
 }

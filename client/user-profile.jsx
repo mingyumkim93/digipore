@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 
 export class UserProfilePage extends React.Component{
 
@@ -30,7 +31,7 @@ export class UserProfilePage extends React.Component{
             <h3> Phone Number : {user.phone}</h3>
             <h1> {user.firstName} {user.lastName}'s reviews..</h1>
             {showReviews}
-            <button onClick={()=>this.props.history.goBack()}>Back</button>
+            <Button outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>
         </div>
 
     }

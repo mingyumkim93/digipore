@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Errands} from './errands';
+import { Table, Button, Input } from 'reactstrap';
 
 export class ErrandsListPage extends React.Component {
     
@@ -46,11 +47,11 @@ export class ErrandsListPage extends React.Component {
         let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentId={localStorage.getItem("currentUser")} role={this.state.currentUserRole}/>)
        
         return <div>
-            <button onClick={()=>this.props.history.push("/create-errand")}> New Errand </button>
-            <button onClick={()=>this.props.history.push("/my-errands-list")}> My Errands </button>
-            <button onClick={()=>this.props.history.push(`/my-account`)}> My Account</button>
-            <input type="text" id="filter" placeholder="Filter" onChange={e=>this.filterChanged(e)} />
-            <table>
+            <Button outline color="primary" onClick={()=>this.props.history.push("/create-errand")}> New Errand </Button>
+            <Button outline color="primary" onClick={()=>this.props.history.push("/my-errands-list")}> My Errands </Button>
+            <Button outline color="primary" onClick={()=>this.props.history.push(`/my-account`)}> My Account</Button>
+            <Input type="text" id="filter" placeholder="Filter" onChange={e=>this.filterChanged(e)} />
+            <Table>
                 <thead>
                     <tr>
                         <td>Poster</td>
@@ -66,13 +67,13 @@ export class ErrandsListPage extends React.Component {
                 <tbody>
                     {rows}
                 </tbody>
-            </table>
-            <button onClick={()=>{
+            </Table>
+            <Button outline color="primary" onClick={()=>{
                 localStorage.clear();
                 this.logout();
                 this.props.history.push("/");
-            }}>Logout</button>
-            <button onClick={()=>this.logout()}>Test:Destroy session</button>
+            }}>Logout</Button>
+            <Button outline color="primary" onClick={()=>this.logout()}>Test:Destroy session</Button>
         </div>
 
     }

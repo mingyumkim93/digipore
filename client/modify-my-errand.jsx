@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Button, Input} from 'reactstrap';
 
 export class ModifyMyErrandPage extends React.Component {
 
@@ -77,8 +78,9 @@ export class ModifyMyErrandPage extends React.Component {
     }
 
     deleteErrand() {
-        let errandId = this.props.match.params.id;
-        axios.delete(`/api/errands/${errandId}`).then(() => this.props.history.push("/errands-list"))
+            let errandId = this.props.match.params.id;
+            axios.delete(`/api/errands/${errandId}`).then(() => this.props.history.push("/errands-list"))
+        
     }
 
     render() {
@@ -86,17 +88,23 @@ export class ModifyMyErrandPage extends React.Component {
 
         if ((errand.poster == localStorage.getItem("currentUser")) || this.state.currentUserRole == 10) {
             return <div>
-                <input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
-                <input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
-                <input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
-                <textarea onChange={ev => this.textChanged(ev)} type="text" id="newExplanation" value={newExplanation} />
-                <button onClick={() => {
-                    this.modifyErrand();
-                }}>modify</button>
-                <button onClick={() => {
+                <Input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
+                <Input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
+                <Input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
+                <Input  onChange={ev => this.textChanged(ev)} type="textarea" id="newExplanation" value={newExplanation} />
+                <Button outline color = "primary" onClick={() => {
+                     let doubleCheck = confirm("Do you really want to accept this offer?");
+                     if (doubleCheck) {
+                        this.modifyErrand();
+                     }
+                }}>modify</Button>
+                <Button outline color = "primary" onClick={() => {
+                    let doubleCheck = confirm("Do you really want to accept this offer?");
+                    if (doubleCheck) {
                     this.deleteErrand();
-                }}>delete</button>
-                <button onClick={() => this.props.history.push("/errands-list")}>cancel</button>
+                    }
+                }}>delete</Button>
+                <Button outline color = "primary" onClick={() => this.props.history.push("/errands-list")}>cancel</Button>
             </div>
         }
         else {

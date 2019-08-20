@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from 'reactstrap'
+import { Button, Container, Row, Col, Input, Media } from 'reactstrap'
 
 export class LoginPage extends React.Component {
     constructor(props) {
@@ -27,7 +27,7 @@ export class LoginPage extends React.Component {
             .then((resp) => {
                 if (resp.status == 200) {
                     localStorage.setItem("isAuthenticated", true);
-                    localStorage.setItem("currentUser",emailInput);
+                    localStorage.setItem("currentUser", emailInput);
                     this.props.history.push("/errands-list");
                 }
             })
@@ -36,13 +36,34 @@ export class LoginPage extends React.Component {
 
     render() {
         let { emailInput, passwordInput } = this.state;
-        return <div>
-            <input type="text" id="emailInput" name="emailInput" placeholder="Email" onChange={ev => this.textChanged(ev)} />
-            <input type="password" id="passwordInput" name="passwordInput" placeholder="Password" onChange={ev => this.textChanged(ev)} />
-            <Button color="primary" onClick={
-                () => this.sendLoginRequest(emailInput, passwordInput)}
-            >Login</Button>
-            <Button color="primary" onClick={()=>this.props.history.push("/signup")} >Sign Up</Button>
-        </div>
+        return (
+            <Container>
+                <Row className = "align-items-center">
+                    <Col className="d-none d-sm-block" sm="6">
+                        <Media style={{ maxWidth: "100%" }} src="testtest.png" alt="Generic placeholder image" />
+                    </Col>
+                    <Col sm="6">
+                        <Row >
+                            <Col style={{marginTop:"5%"}} sm="6">
+                                <Input type="text" id="emailInput" placeholder="Email" name="emailInput" onChange={ev => this.textChanged(ev)} />
+                            </Col>
+                            <Col style={{marginTop:"5%"}} sm="6">
+                                <Input type="password" id="passwordInput" placeholder="Password" name="passwordInput" onChange={ev => this.textChanged(ev)} />
+                            </Col>
+                        </Row>
+                        <Row >
+                            <Col style={{marginTop:"5%"}} sm="6">
+                                <Button style={{ width: "100%" }} outline color="primary" onClick={
+                                    () => this.sendLoginRequest(emailInput, passwordInput)}
+                                >Login</Button>
+                            </Col>
+                            <Col style={{marginTop:"5%"}} sm="6">
+                                <Button style={{ width: "100%" }} outline color="primary" onClick={() => this.props.history.push("/signup")} >Sign Up</Button>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+        )
     }
 }

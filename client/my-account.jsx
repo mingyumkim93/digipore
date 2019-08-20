@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Button, Input, Label} from 'reactstrap';
 
 export class MyAccountPage extends React.Component{
 
@@ -52,12 +53,16 @@ export class MyAccountPage extends React.Component{
 
     render(){
         return<div>
-            <input onChange={(e)=>this.textChanged(e)} type="text" id="newFirstName" value={this.state.newFirstName}></input>
-            <input onChange={(e)=>this.textChanged(e)} type="text" id="newLastName" value={this.state.newLastName}></input>
-            <input onChange={(e)=>this.textChanged(e)} type="text" id="newPhone" value={this.state.newPhone}></input>
-            <input onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
-            <button onClick={()=>this.updateAccount()}>Change</button>
-            <button onClick={()=>this.props.history.goBack()}>Back</button>
+            <Label>First Name</Label>
+            <Input onChange={(e)=>this.textChanged(e)} type="text" id="newFirstName" value={this.state.newFirstName}></Input>
+            <Label>Last Name</Label>
+            <Input onChange={(e)=>this.textChanged(e)} type="text" id="newLastName" value={this.state.newLastName}></Input>
+            <Label>Phone</Label>
+            <Input onChange={(e)=>this.textChanged(e)} type="text" id="newPhone" value={this.state.newPhone}></Input>
+            <Label>Password</Label>
+            <Input onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
+            <Button outline color = "primary" onClick={()=>this.updateAccount()}>Change</Button>
+            <Button outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>
         </div>
     }
 }
