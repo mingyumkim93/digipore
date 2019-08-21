@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const changeErrandToNotAccepted = (errand) => {
@@ -56,30 +57,30 @@ export const ErrandsIRun = ({ errand, updateMyErrandsList }) => <tr>
     <td>{errand.fee}</td>
     {errand.state == 0 && <td>Waiting for acceptance</td>}
     {errand.state == 10 && <td>You are running it
-    <button onClick={() => {
+    <Button outline color = "primary"  onClick={() => {
             let doubleCheck = confirm("Do you really want to finalize this errand?")
             if (doubleCheck) {
                 RunnerConfirm(errand);
                 leaveReviewToPoster(errand);
                 updateMyErrandsList(true);
             }
-        }}>Confirm</button>
-        <button onClick={() => {
+        }}>Confirm</Button>
+        <Button outline color = "primary"  onClick={() => {
             let doubleCheck = confirm("Do you really want to cancel running this errand?")
             if (doubleCheck) { 
                 changeErrandToNotAccepted(errand);
                 updateMyErrandsList(true);
              }
-        }}>Cancel this errand</button></td>}
+        }}>Cancel this errand</Button></td>}
     {errand.state == 20 && <td>Poster Confirmed. Please Confirm.
-    <button onClick={() => {
+    <Button outline color = "primary"  onClick={() => {
             let doubleCheck = confirm("Do you really want to finalize this errand?")
             if (doubleCheck) {
                 finalizeErrand(errand);
                 leaveReviewToPoster(errand);
                 updateMyErrandsList(true);
             }
-        }}>Confirm</button></td>}
+        }}>Confirm</Button></td>}
     {errand.state == 30 && <td>You confirmed. Waiting for poster confirm..</td>}
     {errand.state == 40 && <td>Done</td>}
     <td><Link to={`user/${errand.poster}`}>{errand.poster}</Link></td>

@@ -71,8 +71,8 @@ export class SignUpPage extends React.Component {
             </Row>
             <Row style={{marginBottom:30}}>
                 <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Button outline color="primary" onClick={() => this.signUp()}>Sign Up</Button>
-                <Button outline color="primary" onClick={() => this.props.history.goBack()}>Back</Button>
+                <Button style={{width : "50%"}} outline color="primary" onClick={() => this.signUp()}>Sign Up</Button>
+                <Button style={{width : "50%"}} outline color="primary" onClick={() => this.props.history.goBack()}>Back</Button>
                  </Col>
             </Row>
         </Container>

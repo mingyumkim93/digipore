@@ -50,7 +50,6 @@ export class MyAccountPage extends React.Component{
     textChanged(e){
         this.setState({[e.target.id]:e.target.value});
     }
-
     render(){
         return<div>
             <Label>First Name</Label>
@@ -61,8 +60,9 @@ export class MyAccountPage extends React.Component{
             <Input onChange={(e)=>this.textChanged(e)} type="text" id="newPhone" value={this.state.newPhone}></Input>
             <Label>Password</Label>
             <Input onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
-            <Button outline color = "primary" onClick={()=>this.updateAccount()}>Change</Button>
-            <Button outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>
+
+            <Button style = {{width:"50%"}} outline color = "primary" onClick={()=>this.updateAccount()}>Change</Button>
+            <Button style = {{width:"50%"}} outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>
         </div>
     }
 }

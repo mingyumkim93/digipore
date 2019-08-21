@@ -9,7 +9,7 @@ window.onload = function () {
 
 	ReactDOM.render(
 		<BrowserRouter>
-			<ErrandApp/>
+			<ErrandApp />
 		</BrowserRouter>
 		,
 		document.getElementById('appcontent')

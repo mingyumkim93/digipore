@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Offer } from './offers';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 export class SeeOfferPage extends React.Component {
 
     constructor(props) {
@@ -41,6 +41,7 @@ export class SeeOfferPage extends React.Component {
         this.getErrandFromDB(errandId)
     }
 
+
     render() {
         let { offers, errand } = this.state;
         let stateZeroOffers = [];
@@ -48,7 +49,7 @@ export class SeeOfferPage extends React.Component {
         let rows = stateZeroOffers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
         if (offers.length == 0) return <h1>There is no offer..</h1>
         if (errand.poster == localStorage.getItem("currentUser")) {
-            return <div><Table>
+            return <div><Table responsive={true}>
                 <thead>
                     <tr>
                         <td>From</td>
@@ -59,11 +60,14 @@ export class SeeOfferPage extends React.Component {
                     </tr>
                 </thead>
                 <thead>{rows}</thead>
-            </Table></div>
+            </Table>
+            
+            <Button  outline color="primary" onClick={() => this.props.history.goBack()}>Back</Button></div>
         }
         else {
             return <div>
                 <h1>You can't access this page</h1>
+                 <Button  outline color="primary" onClick={() =>  this.props.history.goBack()}>Back</Button>
             </div>
         }
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 export class Offer extends React.Component {
@@ -28,7 +29,7 @@ export class Offer extends React.Component {
         let offer = this.props.offer;
         let errand = this.props.errand;
         return <tr>
-            <td>{offer.sender}</td>
+            <td><NavLink to={`/user/${offer.sender}`}>{offer.sender}</NavLink></td>
             <td>{offer.message}</td>
             <td>{offer.fee}</td>
             <td>{offer.date}</td>

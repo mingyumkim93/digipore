@@ -45,7 +45,7 @@ export class MyErrandsListPage extends React.Component {
         return <div>
             <div>
                 <Label>Errands you posted</Label>
-                <Table>
+                <Table responsive={true}>
                     <thead>
                         <tr>
                             <td>Title</td>
@@ -65,7 +65,7 @@ export class MyErrandsListPage extends React.Component {
             <br />
             <div>
                 <Label>Errands you are running / Errands you have run</Label>
-                <Table>
+                <Table responsive={true}>
                     <thead>
                         <tr>
                             <td>Title</td>

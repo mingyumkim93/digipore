@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -84,31 +85,31 @@ export class ErrandsIPosted extends React.Component{
         <td>{errand.fee}</td>
         {errand.state == 0 && <td><Link  to={`/see-offers/${errand.id}`}>See offer ({stateZeroOffers.length})</Link></td>}
         {errand.state == 10 && <td>In progress
-        <button onClick={() => {
+        <Button outline color = "primary" onClick={() => {
                 let doubleCheck = confirm("Do you really want to finalize this errand?")
                 if (doubleCheck) {
                     this.posterConfirm(errand);
                     this.leaveReviewToRunner(errand);
                     this.props.updateMyErrandsList(true);
                 }
-            }}>Confirm</button>
-            <button onClick={() => {
+            }}>Confirm</Button>
+            <Button outline color = "primary"  onClick={() => {
                 let doubleCheck = confirm("Do you really want to cancel this errand?")
                 if (doubleCheck) { 
                     this.changeErrandToNotAccepted(errand); 
                     this.props.updateMyErrandsList(true);
                 }
-            }}>Cancel this runner</button></td>}
+            }}>Cancel this runner</Button></td>}
         {errand.state == 20 && <td>You Confirmed. Waiting for runner confirm..</td>}
         {errand.state == 30 && <td>Runner Confirmed. Please Confirm.
-        <button onClick={() => {
+        <Button outline color = "primary"  onClick={() => {
                 let doubleCheck = confirm("Do you really want to finalize this errand?")
                 if (doubleCheck) {
                     this.finalizeErrand(errand);
                     this.leaveReviewToRunner(errand);
                     this.props.updateMyErrandsList(true);
                 }
-            }}>Confirm</button></td>}
+            }}>Confirm</Button></td>}
         {errand.state == 40 && <td>Done</td>}
         <td>{errand.runner == "" && "-"}<Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
         <td>{errand.requestedDayAndTime}</td>
