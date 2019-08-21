@@ -61,7 +61,6 @@ export class SeeOfferPage extends React.Component {
                 </thead>
                 <thead>{rows}</thead>
             </Table>
-            
             <Button  outline color="primary" onClick={() => this.props.history.goBack()}>Back</Button></div>
         }
         else {

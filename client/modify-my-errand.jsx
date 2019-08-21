@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Button, Input} from 'reactstrap';
+import {Button, Input, Label} from 'reactstrap';
 
 export class ModifyMyErrandPage extends React.Component {
 
@@ -88,10 +88,14 @@ export class ModifyMyErrandPage extends React.Component {
 
         if ((errand.poster == localStorage.getItem("currentUser")) || this.state.currentUserRole == 10) {
             return <div>
+                <Label>Title</Label>
                 <Input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
+                <Label>Explanation</Label>
+                <Input onChange={ev => this.textChanged(ev)} type="textarea" id="newExplanation" value={newExplanation} />
+                <Label>Location</Label>
                 <Input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
+                <Label>Fee</Label>
                 <Input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
-                <Input  onChange={ev => this.textChanged(ev)} type="textarea" id="newExplanation" value={newExplanation} />
                 <Button outline color = "primary" onClick={() => {
                      let doubleCheck = confirm("Do you really want to accept this offer?");
                      if (doubleCheck) {

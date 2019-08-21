@@ -56,4 +56,6 @@ module.exports = function (app, db) {
     };
     app.delete("/api/errands/:id", deleteErrand);
 
+    
+    //TODO : add get user by errandId
 }

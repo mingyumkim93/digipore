@@ -16,7 +16,6 @@ import { MyAccountPage} from './my-account';
 export class ErrandApp extends React.Component {
 
     render() {
-       
 
         return <div style={{marginTop : 50}}>
             <Switch>

@@ -30,7 +30,7 @@ module.exports = function (db) {
             db.paramQuery("DELETE from errand where id=?", id, function ({ error, data }) {
                 cb(data);
             });
-
         }
+
     }
 }

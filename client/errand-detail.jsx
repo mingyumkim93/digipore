@@ -1,19 +1,29 @@
 import React from 'react';
 import axios from 'axios';
-import {Button} from 'reactstrap';
+import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 export class ErrandDetailPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            errand: {}
+            errand: {},
+            poster: {}
         }
+    }
+
+    getPosterInfoByErrandPoster(poster) {
+        axios.get(`/api/user/${poster}`).then(res => {
+            const poster = res.data;
+            this.setState({ poster });
+        }).catch(err => console.log(err));
+
     }
 
     getErrandFromDB(errandId) {
         axios.get(`/api/errands/${errandId}`).then(res => {
             const errand = res.data;
             this.setState({ errand });
+            this.getPosterInfoByErrandPoster(errand.poster);
         });
     }
 
@@ -23,15 +33,54 @@ export class ErrandDetailPage extends React.Component {
     }
 
     render() {
-        let { errand } = this.state;
-        return <div> <h2>{this.state.errand.explanation}</h2>
-            {this.state.errand.state == 0 && 
-            <Button outline color ="primary" onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>
-                Create Offer
-                </Button>}
-            <Button outline color ="primary" onClick={() => this.props.history.push("/errands-list")}>
+        let { errand, poster } = this.state;
+        return <ListGroup flush>
+                 <ListGroupItem style={{padding:0}}>
+                     <ListGroupItemHeading>Name</ListGroupItemHeading>
+                     <ListGroupItemText>
+                      {poster.firstName} {poster.lastName}
+                     </ListGroupItemText>
+                 </ListGroupItem>
+                <ListGroupItem style={{padding:0}}>
+                      <ListGroupItemHeading>Email</ListGroupItemHeading>
+                      <ListGroupItemText>
+                         {poster.email}
+                      </ListGroupItemText>
+                </ListGroupItem>
+                <ListGroupItem style={{padding:0}}> 
+                       <ListGroupItemHeading>Phone</ListGroupItemHeading>
+                        <ListGroupItemText>
+                         {poster.phone}
+                        </ListGroupItemText>
+                </ListGroupItem>
+                <ListGroupItem style={{padding:0}}>
+                         <ListGroupItemHeading>Title</ListGroupItemHeading>
+                         <ListGroupItemText>
+                            {errand.title}
+                        </ListGroupItemText>
+                </ListGroupItem>
+                <ListGroupItem style={{padding:0}}>
+                         <ListGroupItemHeading>Explanation</ListGroupItemHeading>
+                         <ListGroupItemText>
+                            {errand.explanation}
+                      </ListGroupItemText>
+                </ListGroupItem>
+                <ListGroupItem style={{padding:0}}>
+                        <ListGroupItemHeading>Fee</ListGroupItemHeading>
+                        <ListGroupItemText>
+                          {errand.fee}
+                        </ListGroupItemText>
+                </ListGroupItem>
+            {errand.state == 0 &&
+            <Button outline color="primary" onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>
+                    Create Offer
+            </Button>}
+            <Button outline color="primary" onClick={() => this.props.history.push(`/user/${poster.email}`)}>
+                Poster Profile
+            </Button>
+            <Button outline color="primary" onClick={() => this.props.history.push("/errands-list")}>
                 Back to list
             </Button>
-        </div>
+        </ListGroup>
     }
 }
