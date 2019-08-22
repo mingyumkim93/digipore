@@ -56,10 +56,10 @@ export class CreateOfferPage extends React.Component{
         if(this.state.errand.poster == localStorage.getItem("currentUser"))
         return <div><h1>You can't offer to your errand</h1></div>
         return <div>
-            <Input type="textarea" id="message" placeholder="message" onChange={(ev)=>this.textChanged(ev)}/>
-            <Input type="number" id="fee" placeholder="Fee" onChange={(ev)=>this.textChanged(ev)}/>
-            <Button outline color="primary" onClick={()=>this.sendOffer()}>Send</Button>
-            <Button outline color="primary" onClick={()=>this.props.history.goBack()}>Back</Button>
+            <Input style={{marginBottom:"2%"}} type="textarea" id="message" placeholder="message" onChange={(ev)=>this.textChanged(ev)}/>
+            <Input style={{marginBottom:"2%"}} type="number" id="fee" placeholder="Fee" onChange={(ev)=>this.textChanged(ev)}/>
+            <Button style={{width:"50%"}} outline color="primary" onClick={()=>this.sendOffer()}>Send</Button>
+            <Button style={{width:"50%"}} outline color="primary" onClick={()=>this.props.history.goBack()}>Back</Button>
         </div>
     }
 }

@@ -34,7 +34,7 @@ export class ErrandDetailPage extends React.Component {
 
     render() {
         let { errand, poster } = this.state;
-        return <ListGroup flush>
+        return <ListGroup>
                  <ListGroupItem style={{padding:0}}>
                      <ListGroupItemHeading>Name</ListGroupItemHeading>
                      <ListGroupItemText>
@@ -65,20 +65,20 @@ export class ErrandDetailPage extends React.Component {
                             {errand.explanation}
                       </ListGroupItemText>
                 </ListGroupItem>
-                <ListGroupItem style={{padding:0}}>
+                <ListGroupItem style={{padding:0, marginBottom:"2%"}}>
                         <ListGroupItemHeading>Fee</ListGroupItemHeading>
                         <ListGroupItemText>
                           {errand.fee}
                         </ListGroupItemText>
                 </ListGroupItem>
             {errand.state == 0 &&
-            <Button outline color="primary" onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>
+            <Button  outline color="primary" onClick={() => this.props.history.push(`/create-offer/${errand.id}`)}>
                     Create Offer
             </Button>}
-            <Button outline color="primary" onClick={() => this.props.history.push(`/user/${poster.email}`)}>
+            <Button  outline color="primary" onClick={() => this.props.history.push(`/user/${poster.email}`)}>
                 Poster Profile
             </Button>
-            <Button outline color="primary" onClick={() => this.props.history.push("/errands-list")}>
+            <Button  outline color="primary" onClick={() => this.props.history.push("/errands-list")}>
                 Back to list
             </Button>
         </ListGroup>

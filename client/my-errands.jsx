@@ -78,10 +78,10 @@ export class MyErrandsListPage extends React.Component {
                             <td>Location</td>
                         </tr>
                     </thead>
-                    <tbody>{rowsErrandsIRun}</tbody>
+                    <tbody >{rowsErrandsIRun}</tbody>
                 </Table>
             </div>
-            <Button outline color ="primary" onClick={() => this.props.history.push("/errands-list")}>Back to list</Button>
+            <Button outline color ="primary" onClick={() => this.props.history.push("/errands-list")}>Back To List</Button>
         </div>
     }
 }

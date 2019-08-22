@@ -42,7 +42,7 @@ export class ErrandsListPage extends React.Component {
 
     render() {
         let { errands, filter } = this.state;
-        let filtered = errands.filter(errand => errand.title.includes(filter));
+        let filtered = errands.filter(errand => errand.title.toLowerCase().includes(filter.toLowerCase()));
         let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentId={localStorage.getItem("currentUser")} role={this.state.currentUserRole} />)
 
         return <Container>

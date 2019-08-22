@@ -59,7 +59,7 @@ export class MyAccountPage extends React.Component{
             <Label>Phone</Label>
             <Input onChange={(e)=>this.textChanged(e)} type="text" id="newPhone" value={this.state.newPhone}></Input>
             <Label>Password</Label>
-            <Input onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
+            <Input style={{marginBottom:"2%"}} onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
 
             <Button style = {{width:"50%"}} outline color = "primary" onClick={()=>this.updateAccount()}>Change</Button>
             <Button style = {{width:"50%"}} outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>

@@ -89,26 +89,26 @@ export class ModifyMyErrandPage extends React.Component {
         if ((errand.poster == localStorage.getItem("currentUser")) || this.state.currentUserRole == 10) {
             return <div>
                 <Label>Title</Label>
-                <Input onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
+                <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
                 <Label>Explanation</Label>
-                <Input onChange={ev => this.textChanged(ev)} type="textarea" id="newExplanation" value={newExplanation} />
+                <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="textarea" id="newExplanation" value={newExplanation} />
                 <Label>Location</Label>
-                <Input onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
+                <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
                 <Label>Fee</Label>
-                <Input onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
-                <Button outline color = "primary" onClick={() => {
-                     let doubleCheck = confirm("Do you really want to accept this offer?");
+                <Input style={{marginBottom:"2%"}} onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
+                <Button style={{width:"33.3%"}} outline color = "primary" onClick={() => {
+                     let doubleCheck = confirm("Do you really want to modify this errand?");
                      if (doubleCheck) {
                         this.modifyErrand();
                      }
-                }}>modify</Button>
-                <Button outline color = "primary" onClick={() => {
-                    let doubleCheck = confirm("Do you really want to accept this offer?");
+                }}>Save Changes</Button>
+                <Button style={{width:"33.3%"}}  outline color = "primary" onClick={() => {
+                    let doubleCheck = confirm("Do you really want to delete this errand?");
                     if (doubleCheck) {
                     this.deleteErrand();
                     }
-                }}>delete</Button>
-                <Button outline color = "primary" onClick={() => this.props.history.push("/errands-list")}>cancel</Button>
+                }}>Delete</Button>
+                <Button style={{width:"33.3%"}} outline color = "primary" onClick={() => this.props.history.push("/errands-list")}>Cancel</Button>
             </div>
         }
         else {

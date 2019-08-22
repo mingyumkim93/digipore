@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 
 export class UserProfilePage extends React.Component{
 
@@ -26,13 +26,28 @@ export class UserProfilePage extends React.Component{
 
     render(){
         let {user, reviews} = this.state;
-        let showReviews = reviews.map(review => <h4>From {review.sender} : {review.comment} {review.stars} stars, Date: {review.date}</h4>)
-        return <div>
-            <h3> Phone Number : {user.phone}</h3>
-            <h1> {user.firstName} {user.lastName}'s reviews..</h1>
-            {showReviews}
-            <Button outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>
-        </div>
+        let showReviews = reviews.map(review => <ListGroupItem key={review.id} style={{padding:0}}>
+            <ListGroupItemHeading>{review.sender}</ListGroupItemHeading>
+            <ListGroupItemText>{review.stars}Stars : {review.comment}</ListGroupItemText>
+        </ListGroupItem>)
 
+        return <ListGroup>
+            <h3>User Info</h3>
+            <ListGroupItem style={{padding:0}}>
+                <ListGroupItemHeading>Name</ListGroupItemHeading>
+                <ListGroupItemText>{user.firstName} {user.lastName}</ListGroupItemText>
+            </ListGroupItem>
+            <ListGroupItem style={{padding:0}}>
+                <ListGroupItemHeading>Email</ListGroupItemHeading>
+                <ListGroupItemText>{user.email}</ListGroupItemText>
+            </ListGroupItem>
+            <ListGroupItem style={{padding:0}}>
+                <ListGroupItemHeading>Phone</ListGroupItemHeading>
+                <ListGroupItemText>{user.phone}</ListGroupItemText>
+            </ListGroupItem>
+            <h3>Reviews</h3>
+            {showReviews}
+            <Button style={{marginTop:"2%"}} outline color = "primary" onClick={()=>this.props.history.goBack()}>Back</Button>
+        </ListGroup>
     }
 }

@@ -46,14 +46,14 @@ export class NewErrandPage extends React.Component {
 
   render() {
     return <div>
-      <Input type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
-      <Input type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
-      <Input type="number" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
-      <Input type="textarea" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
-      <Button outline color ="primary" onClick={() => {
+      <Input style={{marginBottom:"2%"}} type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
+      <Input style={{marginBottom:"2%"}} type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
+      <Input style={{marginBottom:"2%"}} type="number" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>
+      <Input style={{marginBottom:"2%"}} type="textarea" id="explanation" placeholder="Explanation" onChange={ev => this.textChanged(ev)} />
+      <Button style={{width:"50%"}} outline color ="primary" onClick={() => {
         this.createErrand();
       }}>Post</Button>
-      <Button outline color ="primary"  onClick={() => this.props.history.push("/errands-list")}>Cancel</Button>
+      <Button style={{width:"50%"}}  outline color ="primary"  onClick={() => this.props.history.push("/errands-list")}>Cancel</Button>
     </div>
   }
 }

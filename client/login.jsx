@@ -40,7 +40,7 @@ export class LoginPage extends React.Component {
             <Container>
                 <Row className = "align-items-center">
                     <Col className="d-none d-sm-block" sm="6">
-                        <Media style={{ maxWidth: "100%" }} src="testtest.png" alt="Generic placeholder image" />
+                        <Media style={{ maxWidth: "100%" }} src="myimage.jpg" alt="Generic placeholder image" />
                     </Col>
                     <Col sm="6">
                         <Row >
