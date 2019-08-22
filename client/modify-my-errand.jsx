@@ -74,12 +74,12 @@ export class ModifyMyErrandPage extends React.Component {
         newErrand.explanation = this.state.newExplanation;
         newErrand.location = this.state.newLocation;
         newErrand.fee = this.state.newFee;
-        axios.put(`/api/errands/${errandId}`, newErrand).then(() => this.props.history.push("/errands-list"));
+        axios.put(`/api/errands/${errandId}`, newErrand).then(() => this.props.history.push("/my-errands-list"));
     }
 
     deleteErrand() {
             let errandId = this.props.match.params.id;
-            axios.delete(`/api/errands/${errandId}`).then(() => this.props.history.push("/errands-list"))
+            axios.delete(`/api/errands/${errandId}`).then(() => this.props.history.push("/my-errands-list"))
         
     }
 
@@ -88,6 +88,7 @@ export class ModifyMyErrandPage extends React.Component {
 
         if ((errand.poster == localStorage.getItem("currentUser")) || this.state.currentUserRole == 10) {
             return <div>
+                <h4>Modify My Errand</h4>
                 <Label>Title</Label>
                 <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="text" id="newTitle" value={newTitle} />
                 <Label>Explanation</Label>
@@ -95,7 +96,7 @@ export class ModifyMyErrandPage extends React.Component {
                 <Label>Location</Label>
                 <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
                 <Label>Fee</Label>
-                <Input style={{marginBottom:"2%"}} onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder="Fee" />
+                <Input style={{marginBottom:"2%"}} onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder={`${errand.fee}€`} />
                 <Button style={{width:"33.3%"}} outline color = "primary" onClick={() => {
                      let doubleCheck = confirm("Do you really want to modify this errand?");
                      if (doubleCheck) {
@@ -108,7 +109,7 @@ export class ModifyMyErrandPage extends React.Component {
                     this.deleteErrand();
                     }
                 }}>Delete</Button>
-                <Button style={{width:"33.3%"}} outline color = "primary" onClick={() => this.props.history.push("/errands-list")}>Cancel</Button>
+                <Button style={{width:"33.3%"}} outline color = "primary" onClick={() => this.props.history.goBack()}>Cancel</Button>
             </div>
         }
         else {

@@ -47,9 +47,11 @@ export class SeeOfferPage extends React.Component {
         let stateZeroOffers = [];
         offers.map(offer => { if (offer.state == 0) stateZeroOffers.push(offer) });
         let rows = stateZeroOffers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
-        if (offers.length == 0) return <h1>There is no offer..</h1>
+        if (offers.length == 0) return <h1>There are no offers</h1>
         if (errand.poster == localStorage.getItem("currentUser")) {
-            return <div><Table responsive={true}>
+            return <div>
+                <h4>See Offer</h4>
+                <Table responsive={true}>
                 <thead>
                     <tr>
                         <td>From</td>

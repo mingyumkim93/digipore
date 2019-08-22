@@ -52,6 +52,7 @@ export class MyAccountPage extends React.Component{
     }
     render(){
         return<div>
+            <h4>My Account</h4>
             <Label>First Name</Label>
             <Input onChange={(e)=>this.textChanged(e)} type="text" id="newFirstName" value={this.state.newFirstName}></Input>
             <Label>Last Name</Label>

@@ -34,6 +34,11 @@ export class LoginPage extends React.Component {
             .catch((err) => alert("Please check your email or password."));
     }
 
+    handleKeyPress(target){
+        if(target.charCode==13)
+            this.sendLoginRequest(this.state.emailInput, this.state.passwordInput);
+    }
+
     render() {
         let { emailInput, passwordInput } = this.state;
         return (
@@ -43,12 +48,13 @@ export class LoginPage extends React.Component {
                         <Media style={{ maxWidth: "100%" }} src="myimage.jpg" alt="Generic placeholder image" />
                     </Col>
                     <Col sm="6">
+                    <h2>Run My Errand</h2>
                         <Row >
                             <Col style={{marginTop:"5%"}} sm="6">
-                                <Input type="text" id="emailInput" placeholder="Email" name="emailInput" onChange={ev => this.textChanged(ev)} />
+                                <Input autoFocus type="text" id="emailInput" placeholder="Email" name="emailInput" onChange={ev => this.textChanged(ev)} onKeyPress={target=> this.handleKeyPress(target)}/>
                             </Col>
                             <Col style={{marginTop:"5%"}} sm="6">
-                                <Input type="password" id="passwordInput" placeholder="Password" name="passwordInput" onChange={ev => this.textChanged(ev)} />
+                                <Input type="password" id="passwordInput" placeholder="Password" name="passwordInput" onChange={ev => this.textChanged(ev)} onKeyPress={target=> this.handleKeyPress(target)}/>
                             </Col>
                         </Row>
                         <Row >

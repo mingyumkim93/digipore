@@ -10,7 +10,7 @@ var session = require('express-session');
 app.use(session({
   secret: 'alskdjskal',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 var passport = require('passport')

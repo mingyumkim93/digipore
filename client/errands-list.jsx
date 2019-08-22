@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Errands } from './errands';
-import { Table, Button, Input, Container, Row, Col } from 'reactstrap';
+import { Table, Button, Input, Container, Row, Col, Label } from 'reactstrap';
 
 export class ErrandsListPage extends React.Component {
 
@@ -46,9 +46,10 @@ export class ErrandsListPage extends React.Component {
         let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentId={localStorage.getItem("currentUser")} role={this.state.currentUserRole} />)
 
         return <Container>
+            <h4>Errand List</h4>
             <Row>
                 <Col sm="6" style={{ padding:0}}>
-                    <Input style = {{height:"100%"}} type="text" id="filter" placeholder="Filter" onChange={e => this.filterChanged(e)} />
+                    <Input style = {{height:"100%" }} type="text" id="filter" placeholder="Add keyword to filter errands based on title" onChange={e => this.filterChanged(e)} />
                 </Col>
                 <Col sm="2" style={{ padding:0}}>
                     <Button style={{ width: "100%" }} outline color="primary" onClick={() => this.props.history.push("/my-errands-list")}> My Errands </Button>
@@ -65,9 +66,8 @@ export class ErrandsListPage extends React.Component {
                  </Col>
             </Row>
             <Row>
-                <Col>
-
-                    <Table responsive={true}>
+                <Col >
+                    <Table className="table-hover">
                         <thead>
                             <tr>
                                 <td>Poster</td>
@@ -84,12 +84,10 @@ export class ErrandsListPage extends React.Component {
                             {rows}
                         </tbody>
                     </Table>
-                   
                 </Col>
             </Row>
             <Row>
-            <Button style={{ width: "100%" }} outline color="primary" onClick={() => this.props.history.push("/create-errand")}> New Errand </Button>
-              
+            <Button style={{ width: "100%", marginBottom:"2%" }} outline color="primary" onClick={() => this.props.history.push("/create-errand")}> New Errand </Button>
             </Row>
 
         </Container>

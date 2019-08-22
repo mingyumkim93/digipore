@@ -115,6 +115,7 @@ export class ErrandsIPosted extends React.Component{
         <td>{errand.requestedDayAndTime}</td>
         <td>{errand.acceptedDayAndTime == "" && "-"}{errand.acceptedDayAndTime}</td>
         <td>{errand.location}</td>
+        <td><Link to={`my-errand/${errand.id}`}>Modify</Link></td>
     </tr>
     
     }

@@ -35,6 +35,7 @@ export class ErrandDetailPage extends React.Component {
     render() {
         let { errand, poster } = this.state;
         return <ListGroup>
+            <h4>Errand Detail</h4>
                  <ListGroupItem style={{padding:0}}>
                      <ListGroupItemHeading>Name</ListGroupItemHeading>
                      <ListGroupItemText>
