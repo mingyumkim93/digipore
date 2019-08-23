@@ -52,23 +52,32 @@ module.exports = function (app, db, passport, LocalStrategy, bcrypt) {
         });
 
     app.get('/api/user/:email', function (req, res) {
-        dao.getUserByEmail(req.params.email, function ({ err, data }) {
-            delete data[0].password;
-            res.json(data[0]);
-        })
+        if(req.isAuthenticated()){
+            dao.getUserByEmail(req.params.email, function ({ err, data }) {
+                delete data[0].password;
+                res.json(data[0]);
+            })
+        }
+        else
+            res.sendStatus(404);
+       
     });
 
     app.put('/api/user/:email', function (req, res) {
-        let saltRounds = 10;
-        bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-            if (err) res.send(err);
-            req.body.password = hash;
-            dao.updateUser(req.body, function ({ err, data }) {
-                if (err) res.send(err)
-                res.sendStatus(200);
+        if(req.isAuthenticate()){
+            let saltRounds = 10;
+            bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+                if (err) res.send(err);
+                req.body.password = hash;
+                dao.updateUser(req.body, function ({ err, data }) {
+                    if (err) res.send(err)
+                    res.sendStatus(200);
+                })
             })
-        })
-
+        }
+        else
+            res.sendStatus(404);
+       
     })
 
     app.post("/api/user", (req, res) => {
@@ -92,6 +101,7 @@ module.exports = function (app, db, passport, LocalStrategy, bcrypt) {
     app.get("/logout", (req, res) => {
         if (req.session)
             req.session.destroy(err => console.log(err));
+        
     })
 
 }

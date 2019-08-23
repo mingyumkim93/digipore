@@ -4,7 +4,7 @@ module.exports = function (app, db) {
     let dao = require("./reviewdao")(db);
 
     let createReview = function (req, res) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.createReview(req.body, function ({ err, data }) {
                 if (err) res.send(err);
                 res.json(data);
@@ -16,7 +16,7 @@ module.exports = function (app, db) {
     app.post("/api/review", createReview);
 
     let getReviewByEmail = function (req, res) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.getReviewByEmail(req.params.email, function ({ err, data }) {
                 if (err) res.send(err);
                 res.json(data);

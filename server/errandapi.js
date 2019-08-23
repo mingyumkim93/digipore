@@ -1,7 +1,7 @@
 module.exports = function (app, db) {
     let dao = require("./erranddao")(db);
     let getAllErrands = function (req, resp) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.getAll(function ({ error, data }) {
                 resp.json(data);
             });
@@ -12,7 +12,7 @@ module.exports = function (app, db) {
     app.get("/api/errands", getAllErrands);
 
     let getErrand = function (req, resp) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             let id = Number(req.params.id);
             dao.get(id, function ({ error, data }) {
                 resp.json(data);
@@ -24,7 +24,7 @@ module.exports = function (app, db) {
     app.get("/api/errands/:id", getErrand);
 
     let postErrand = function (req, resp) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.insert(req.body, function ({ error, data }) {
                 resp.json(data);
             });
@@ -35,7 +35,7 @@ module.exports = function (app, db) {
     app.post("/api/errands", postErrand);
 
     let updataErrand = function (req, resp) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.update(req.body, req.params.id, function ({ error, data }) {
                 resp.json(data);
             });
@@ -46,7 +46,7 @@ module.exports = function (app, db) {
     app.put("/api/errands/:id", updataErrand);
 
     let deleteErrand = function (req, resp) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.delete(req.params.id, function ({ error, data }) {
                 resp.json(data);
             });

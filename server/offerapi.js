@@ -2,7 +2,7 @@ module.exports = function (app, db) {
     let dao = require("./offerdao")(db);
 
     let createOffer = function (req, res) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.createOffer(req.body, function ({ err, data }) {
                 res.json(data);
             });
@@ -13,7 +13,7 @@ module.exports = function (app, db) {
     app.post("/api/offer", createOffer);
 
     let getOffersByErrandId = function (req, res) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.getOffersByErrandId(req.params.id, function ({ err, data }) {
                 res.json(data);
             });
@@ -24,7 +24,7 @@ module.exports = function (app, db) {
     app.get('/api/offer/:id', getOffersByErrandId);
 
     let updateOffer = function (req, res) {
-        if (req.session.passport) {
+        if (req.isAuthenticated()) {
             dao.updateOffer(req.body, req.params.id, function ({ err, data }) {
                 res.json(data);
             });

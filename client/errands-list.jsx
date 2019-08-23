@@ -67,7 +67,7 @@ export class ErrandsListPage extends React.Component {
             </Row>
             <Row>
                 <Col >
-                    <Table className="table-hover">
+                    <Table className="table-hover" responsive={true}>
                         <thead>
                             <tr>
                                 <td>Poster</td>
