@@ -45,10 +45,10 @@ export class LoginPage extends React.Component {
             <Container>
                 <Row className = "align-items-center">
                     <Col className="d-none d-sm-block" sm="6">
-                        <Media style={{ maxWidth: "100%" }} src="myimage.jpg" alt="Generic placeholder image" />
+                        <Media style={{ maxWidth: "100%" }} src="login.jpg" alt="Generic placeholder image" />
                     </Col>
                     <Col sm="6">
-                    <h2>Run My Errand</h2>
+                        <h2>Run My Errand</h2>
                         <Row >
                             <Col style={{marginTop:"5%"}} sm="6">
                                 <Input autoFocus type="text" id="emailInput" placeholder="Email" name="emailInput" onChange={ev => this.textChanged(ev)} onKeyPress={target=> this.handleKeyPress(target)}/>

@@ -46,6 +46,7 @@ export class NewErrandPage extends React.Component {
 
   render() {
     return <div>
+      <h4>New Errand</h4>
       <Input style={{marginBottom:"2%"}} type="text" id="title" placeholder="Title" onChange={ev => this.textChanged(ev)} />
       <Input style={{marginBottom:"2%"}} type="text" id="location" placeholder="Location" onChange={ev=> this.textChanged(ev)} />
       <Input style={{marginBottom:"2%"}} type="number" id="fee" placeholder="Fee" onChange={ev=> this.textChanged(ev)}/>

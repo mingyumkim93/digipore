@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Input, Container, Row, Col } from 'reactstrap';
+import { Button, Input, Container, Row, Col, Media } from 'reactstrap';
 
 export class SignUpPage extends React.Component {
 
@@ -44,37 +44,45 @@ export class SignUpPage extends React.Component {
 
     render() {
         return <Container>
-            <Row style={{marginTop:100, marginBottom:30}}>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                    <Input onChange={(e) => this.textChange(e)} type="text" id="email" placeholder="Email" />
+            <Row className = "align-items-center">
+                <Col className="d-none d-sm-block" sm="6">
+                    <Media style={{ maxWidth: "100%" }} src="signup.jpg" alt="Generic placeholder image" />
                 </Col>
-            </Row>
-            <Row style={{marginBottom:30}}>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Input onChange={(e) => this.textChange(e)} type="text" id="password" placeholder="Password" />
-                </Col>
-            </Row>
-            <Row style={{marginBottom:30}}>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Input onChange={(e) => this.textChange(e)} type="text" id="firstName" placeholder="FirstName" />
-                </Col>
-            </Row>
-            <Row style={{ marginBottom:30}}>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Input onChange={(e) => this.textChange(e)} type="text" id="lastName" placeholder="LastName" />
-                 </Col>
-            </Row>
-            <Row style={{ marginBottom:30}}>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Input onChange={(e) => this.textChange(e)} type="text" id="phone" placeholder="Phone" />
-                 </Col>
-            </Row>
-            <Row style={{marginBottom:30}}>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Button style={{width : "50%"}} outline color="primary" onClick={() => this.signUp()}>Sign Up</Button>
-                <Button style={{width : "50%"}} outline color="primary" onClick={() => this.props.history.goBack()}>Back</Button>
-                 </Col>
-            </Row>
+                <Col sm="6">
+                    <h4>Sign Up</h4>
+                    <Row style={{marginTop:"5%", width:"100%"}}>
+                        <Col>
+                            <Input style={{ width:"100%"}}onChange={(e) => this.textChange(e)} type="text" id="email" placeholder="Email" />
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:"5%", width:"100%"}}>
+                        <Col>
+                            <Input onChange={(e) => this.textChange(e)} type="text" id="password" placeholder="Password" />
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:"5%", width:"100%"}}>
+                        <Col>
+                            <Input onChange={(e) => this.textChange(e)} type="text" id="firstName" placeholder="FirstName" />
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:"5%", width:"100%"}}>
+                        <Col>
+                            <Input onChange={(e) => this.textChange(e)} type="text" id="lastName" placeholder="LastName" />
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:"5%", width:"100%"}}>
+                        <Col>
+                            <Input onChange={(e) => this.textChange(e)} type="text" id="phone" placeholder="Phone" />
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:"5%", width:"100%"}}>
+                        <Col>
+                            <Button style={{width : "50%"}} outline color="primary" onClick={() => this.signUp()}>Sign Up</Button>
+                            <Button style={{width : "50%"}} outline color="primary" onClick={() => this.props.history.goBack()}>Back</Button>
+                        </Col>
+                    </Row>
+                        </Col>
+                    </Row>
         </Container>
 
 
