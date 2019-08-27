@@ -7,7 +7,7 @@ export class MyAccountPage extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            user:{},
+            currentUser:{},
             newFirstName:"",
             newLastName:"",
             newPhone:"",
@@ -15,16 +15,21 @@ export class MyAccountPage extends React.Component{
         }
     }
 
-    componentDidMount(){
-        axios.get(`/api/user/${localStorage.getItem("currentUser")}`)
-        .then(res=>{
-            console.log(res.data);
-            this.setState({user:res.data});
-            this.setState({newFirstName:res.data.firstName});
-            this.setState({newLastName:res.data.lastName});
-            this.setState({newPhone:res.data.phone});
+    checkAuth(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                let currentUser = res.data;
+                this.setState({currentUser});
+            }
         })
-        .catch(err=> console.log(err));
+        .catch(err=> {
+            alert(err + "\nYou are not authrized. Please login!");
+            this.props.history.push("/");
+        });
+    }
+
+    componentDidMount(){
+        this.checkAuth();
     }
 
     updateAccount(){
@@ -51,14 +56,15 @@ export class MyAccountPage extends React.Component{
         this.setState({[e.target.id]:e.target.value});
     }
     render(){
+        let { currentUser } = this.state;
         return<div>
             <h4>My Account</h4>
             <Label>First Name</Label>
-            <Input onChange={(e)=>this.textChanged(e)} type="text" id="newFirstName" value={this.state.newFirstName}></Input>
+            <Input onChange={(e)=>this.textChanged(e)} placeholder = {currentUser.firstName} type="text" id="newFirstName" value={this.state.newFirstName}></Input>
             <Label>Last Name</Label>
-            <Input onChange={(e)=>this.textChanged(e)} type="text" id="newLastName" value={this.state.newLastName}></Input>
+            <Input onChange={(e)=>this.textChanged(e)} placeholder = {currentUser.lastName} type="text" id="newLastName" value={this.state.newLastName}></Input>
             <Label>Phone</Label>
-            <Input onChange={(e)=>this.textChanged(e)} type="text" id="newPhone" value={this.state.newPhone}></Input>
+            <Input onChange={(e)=>this.textChanged(e)} placeholder = {currentUser.phone} type="text" id="newPhone" value={this.state.newPhone}></Input>
             <Label>Password</Label>
             <Input style={{marginBottom:"2%"}} onChange={(e)=>this.textChanged(e)} type="password" id="newPassword" placeholder="New password"/>
 

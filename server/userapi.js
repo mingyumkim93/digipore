@@ -104,4 +104,21 @@ module.exports = function (app, db, passport, LocalStrategy, bcrypt) {
         
     })
 
+    app.get("/isAuthenticated", (req,res)=>{
+
+        if(req.isAuthenticated()){
+            dao.getUserById(req.session.passport.user, function({err,data}){
+                if(err)
+                    send(err)
+                delete data[0].password;
+                res.json(data[0]);
+                console.log("authenticated")
+            })
+        }
+        else{
+            res.status(401).send("Not found")
+            console.log("not auth")
+        }
+
+    });
 }

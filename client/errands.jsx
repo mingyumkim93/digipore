@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export const Errands = function({errand, currentId, role}) {
+export const Errands = function({errand, currentUserEmail, role}) {
     if (role == 10)
     return <tr>
         <td><Link to={`user/${errand.poster}`}>{errand.poster}</Link></td>
@@ -26,9 +26,9 @@ export const Errands = function({errand, currentId, role}) {
             {errand.state !== 0 && <td>In progress</td>}
             <td>{errand.requestedDayAndTime}</td>
             <td>{errand.fee}</td>
-            {currentId == errand.poster &&
+            {currentUserEmail == errand.poster &&
                 <td><Link to={`my-errand/${errand.id}`}>Modify</Link></td>}
-            {currentId !== errand.poster &&
+            {currentUserEmail !== errand.poster &&
                 <td><Link to={`errand/${errand.id}`}>Details</Link></td>}
         </tr>
     else  // Don't show terminated request 

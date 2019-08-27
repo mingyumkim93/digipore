@@ -5,11 +5,28 @@ export class NewErrandPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { title:"", explanation: "", location:"", fee:null }
+    this.state = { title:"", explanation: "", location:"", fee:null, currentUser:{} }
   }
 
   textChanged(ev) {
     this.setState({ [ev.target.id]: ev.target.value });
+  }
+
+  checkAuth(){
+    axios.get("/isAuthenticated").then((res)=>{
+        if(res.status==200){
+            let currentUser = res.data;
+            this.setState({currentUser});
+        }
+    })
+    .catch(err=> {
+        alert(err + "\nYou are not authrized. Please login!");
+        this.props.history.push("/");
+    });
+  }
+
+  componentDidMount(){
+    this.checkAuth();
   }
 
   createErrand() {
@@ -28,7 +45,7 @@ export class NewErrandPage extends React.Component {
       id: null,
       title:this.state.title,
       explanation: this.state.explanation,
-      poster: localStorage.getItem("currentUser"),
+      poster: this.state.currentUser.email,
       runner: null,
       state:0,
       requestedDayAndTime:now,

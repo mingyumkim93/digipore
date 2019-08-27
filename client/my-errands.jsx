@@ -9,9 +9,23 @@ export class MyErrandsListPage extends React.Component {
         super(props);
         this.state = {
             errands: [],
+            currentUser:{},
             updateMyErrandsList:false
         }
         this.updateMyErrandsList = this.updateMyErrandsList.bind(this)
+    }
+
+    checkAuth(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                let currentUser = res.data;
+                this.setState({currentUser});
+            }
+        })
+        .catch(err=> {
+            alert(err + "\nYou are not authrized. Please login!");
+            this.props.history.push("/");
+        });
     }
 
     updateMyErrandsList(val){
@@ -22,18 +36,20 @@ export class MyErrandsListPage extends React.Component {
         axios.get("/api/errands").then(res => {
             const errands = res.data;
             this.setState({ errands });
-        })
+        });
+        this.checkAuth();
     }
 
     render() {
         let errandsIPosted = [];
         let errandsIRun = [];
+        let { currentUser } = this.state;
         this.state.errands.forEach(errand => {
-            if (errand.poster == localStorage.getItem("currentUser"))
+            if (errand.poster == currentUser.email)
                 errandsIPosted.push(errand);
         });
         this.state.errands.forEach(errand => {
-            if (errand.runner == localStorage.getItem("currentUser"))
+            if (errand.runner == currentUser.email)
                 errandsIRun.push(errand);
         });
         let rowsErrandsIPosted = errandsIPosted.map(errand => <ErrandsIPosted

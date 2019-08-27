@@ -12,8 +12,21 @@ export class ModifyMyErrandPage extends React.Component {
             newExplanation: "",
             newLocation: "",
             newFee: 0,
-            currentUserRole:0
+            currentUser:{}
         }
+    }
+
+    checkAuth(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                let currentUser = res.data;
+                this.setState({currentUser});
+            }
+        })
+        .catch(err=> {
+            alert(err + "\nYou are not authrized. Please login!");
+            this.props.history.push("/");
+        });
     }
 
     getErrandFromDB(errandId) {
@@ -36,17 +49,9 @@ export class ModifyMyErrandPage extends React.Component {
     componentDidMount() {
         let errandId = this.props.match.params.id;
         if (errandId) this.getErrandFromDB(errandId);
-        this.getCurrentUserRole()
+        this.checkAuth()
     }
-    getCurrentUserRole(){
-        axios.get(`/api/user/${localStorage.getItem("currentUser")}`)
-        .then(res=>{
-            let currentUserRole = res.data.role;
-            this.setState({currentUserRole});
-        })
-        .catch(err=>console.log(err));
-    }
-
+   
     textChanged(ev) {
         this.setState({ [ev.target.id]: ev.target.value });
     }
@@ -84,9 +89,9 @@ export class ModifyMyErrandPage extends React.Component {
     }
 
     render() {
-        let { newTitle, newExplanation, newLocation, errand } = this.state;
+        let { newTitle, newExplanation, newLocation, errand, currentUser } = this.state;
 
-        if ((errand.poster == localStorage.getItem("currentUser")) || this.state.currentUserRole == 10) {
+        if ((errand.poster == currentUser.email) || currentUser.role == 10) {
             return <div>
                 <h4>Modify My Errand</h4>
                 <Label>Title</Label>

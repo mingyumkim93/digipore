@@ -26,8 +26,6 @@ export class LoginPage extends React.Component {
         axios.post('/login', { emailInput, passwordInput })
             .then((resp) => {
                 if (resp.status == 200) {
-                    localStorage.setItem("isAuthenticated", true);
-                    localStorage.setItem("currentUser", emailInput);
                     this.props.history.push("/errands-list");
                 }
             })

@@ -10,6 +10,18 @@ export class ErrandDetailPage extends React.Component {
             poster: {}
         }
     }
+    checkAuth(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                let currentUser = res.data;
+                this.setState({currentUser});
+            }
+        })
+        .catch(err=> {
+            alert(err + "\nYou are not authrized. Please login!");
+            this.props.history.push("/");
+        });
+    }
 
     getPosterInfoByErrandPoster(poster) {
         axios.get(`/api/user/${poster}`).then(res => {
@@ -30,6 +42,7 @@ export class ErrandDetailPage extends React.Component {
     componentDidMount() {
         let errandId = this.props.match.params.id;
         if (errandId) this.getErrandFromDB(errandId);
+        this.checkAuth();
     }
 
     render() {

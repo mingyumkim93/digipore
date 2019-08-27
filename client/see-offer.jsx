@@ -9,13 +9,27 @@ export class SeeOfferPage extends React.Component {
         this.state = {
             offers: [],
             errand: {},
-            moveToMyErrands: false
+            moveToMyErrands: false,
+            currentUser:{}
         },
             this.moveToMyErrands = this.moveToMyErrands.bind(this)
     }
 
     moveToMyErrands() {
         this.props.history.push("/my-errands-list")
+    }
+
+    checkAuth(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                let currentUser = res.data;
+                this.setState({currentUser});
+            }
+        })
+        .catch(err=> {
+            alert(err + "\nYou are not authrized. Please login!");
+            this.props.history.push("/");
+        });
     }
 
     getOffersToThisErrand(errandId) {
@@ -39,16 +53,17 @@ export class SeeOfferPage extends React.Component {
         let errandId = this.props.match.params.id;
         this.getOffersToThisErrand(errandId)
         this.getErrandFromDB(errandId)
+        this.checkAuth();
     }
 
 
     render() {
-        let { offers, errand } = this.state;
+        let { offers, errand, currentUser } = this.state;
         let stateZeroOffers = [];
         offers.map(offer => { if (offer.state == 0) stateZeroOffers.push(offer) });
         let rows = stateZeroOffers.map(offer => <Offer offer={offer} errand={errand} moveToMyErrands={this.moveToMyErrands} key={offer.id} />)
         if (offers.length == 0) return <h1>There are no offers</h1>
-        if (errand.poster == localStorage.getItem("currentUser")) {
+        if (errand.poster == currentUser.email) {
             return <div>
                 <h4>See Offer</h4>
                 <Table responsive={true}>

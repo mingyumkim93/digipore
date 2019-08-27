@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Errands } from './errands';
-import { Table, Button, Input, Container, Row, Col } from 'reactstrap';
+import { Table, Button, Input, Container, Row, Col, Label } from 'reactstrap';
 
 export class ErrandsListPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            errands: [], filter: "", currentUser: {}
+            errands: [], filter: "", currentUserRole: 0
         }
     }
 
@@ -19,22 +19,17 @@ export class ErrandsListPage extends React.Component {
         });
     }
 
-    checkAuth(){
-        axios.get("/isAuthenticated").then((res)=>{
-            if(res.status==200){
-                let currentUser = res.data;
-                this.setState({currentUser});
-            }
-        })
-        .catch(err=> {
-            alert(err + "\nYou are not authrized. Please login!");
-            this.props.history.push("/");
-        });
+    getCurrentUserRole() {
+        axios.get(`/api/user/${localStorage.getItem("currentUser")}`)
+            .then(res => {
+                let currentUserRole = res.data.role;
+                this.setState({ currentUserRole });
+            })
+            .catch(err => console.log(err));
     }
-
     componentDidMount() {
-        this.checkAuth();
         this.getErrandsFromDB();
+        this.getCurrentUserRole();
     }
 
     filterChanged(e) {
@@ -46,9 +41,9 @@ export class ErrandsListPage extends React.Component {
     }
 
     render() {
-        let { errands, filter, currentUser } = this.state;
+        let { errands, filter } = this.state;
         let filtered = errands.filter(errand => errand.title.toLowerCase().includes(filter.toLowerCase()));
-        let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentUserEmail={currentUser.email} role={currentUser.role} />)
+        let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentId={localStorage.getItem("currentUser")} role={this.state.currentUserRole} />)
 
         return <Container>
             <h4>Errand List</h4>

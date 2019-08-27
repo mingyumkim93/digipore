@@ -11,7 +11,7 @@ module.exports = function (app, db) {
             });
         }
         else
-            resp.send(404);
+            res.send(404);
     };
     app.post("/api/review", createReview);
 

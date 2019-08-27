@@ -12,7 +12,21 @@ export class UserProfilePage extends React.Component{
         }
     }
 
+    checkAuth(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                let currentUser = res.data;
+                this.setState({currentUser});
+            }
+        })
+        .catch(err=> {
+            alert(err + "\nYou are not authrized. Please login!");
+            this.props.history.push("/");
+        });
+    }
+
     componentDidMount(){
+        this.checkAuth();
         let userEmail = this.props.match.params.email;
         axios.get(`/api/user/${userEmail}`).then(res => {
             const user = res.data;
@@ -21,7 +35,7 @@ export class UserProfilePage extends React.Component{
         axios.get(`/api/review/${userEmail}`).then(res=>{
             const reviews = res.data;
             this.setState({reviews})
-        })
+        });
     }
 
     render(){

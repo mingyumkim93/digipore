@@ -21,15 +21,15 @@ export class ErrandApp extends React.Component {
             <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route exact path ="/signup" component={SignUpPage}/>
-                <ProtectedRoute exact path="/errands-list" component={ErrandsListPage} />
-                <ProtectedRoute exact path="/create-errand" component={NewErrandPage}/>
-                <ProtectedRoute exact path="/my-errands-list" component={MyErrandsListPage}/>
-                <ProtectedRoute exact path="/errand/:id" component={ErrandDetailPage}/>
-                <ProtectedRoute exact path="/my-errand/:id" component={ModifyMyErrandPage}/>
-                <ProtectedRoute exact path="/user/:email" component={UserProfilePage}/>
-                <ProtectedRoute exact path="/create-offer/:id" component={CreateOfferPage}/>
-                <ProtectedRoute exact path="/see-offers/:id" component={SeeOfferPage}/>
-                <ProtectedRoute exact path="/my-account" component={MyAccountPage}/>
+                <Route exact path="/errands-list" component={ErrandsListPage} />
+                <Route exact path="/create-errand" component={NewErrandPage}/>
+                <Route exact path="/my-errands-list" component={MyErrandsListPage}/>
+                <Route exact path="/errand/:id" component={ErrandDetailPage}/>
+                <Route exact path="/my-errand/:id" component={ModifyMyErrandPage}/>
+                <Route exact path="/user/:email" component={UserProfilePage}/>
+                <Route exact path="/create-offer/:id" component={CreateOfferPage}/>
+                <Route exact path="/see-offers/:id" component={SeeOfferPage}/>
+                <Route exact path="/my-account" component={MyAccountPage}/>
             </Switch>
         </div>
 
