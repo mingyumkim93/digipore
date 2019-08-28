@@ -17,7 +17,7 @@ export class ErrandApp extends React.Component {
 
     render() {
 
-        return <div style={{marginTop : "1%"}}>
+        return <div style={{height: "100%"}}>
             <Switch>
                 <Route exact path="/" component={LoginPage} />
                 <Route exact path ="/signup" component={SignUpPage}/>

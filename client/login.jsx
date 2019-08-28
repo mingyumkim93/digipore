@@ -40,13 +40,14 @@ export class LoginPage extends React.Component {
     render() {
         let { emailInput, passwordInput } = this.state;
         return (
-            <Container>
-                <Row className = "align-items-center">
-                    <Col className="d-none d-sm-block" sm="6">
-                        <Media style={{ maxWidth: "100%" }} src="login.jpg" alt="Generic placeholder image" />
+            <Container style={{height:"100%", margin:"0%"}} fluid>
+                <Row className = "align-items-center" style={{height:"100%"}}>
+                    <Col className="d-none d-sm-block" sm="6" style={{height:"100%", padding:"0%"}}>
+                        <Media style={{ maxWidth: "100%", marginTop:"10%"}} src="login.jpg" alt="Generic placeholder image" />
                     </Col>
                     <Col sm="6">
                         <h2>Run My Errand</h2>
+
                         <Row >
                             <Col style={{marginTop:"5%"}} sm="6">
                                 <Input autoFocus type="text" id="emailInput" placeholder="Email" name="emailInput" onChange={ev => this.textChanged(ev)} onKeyPress={target=> this.handleKeyPress(target)}/>
