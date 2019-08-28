@@ -12,6 +12,14 @@ export class LoginPage extends React.Component {
         this.setState({ [ev.target.id]: ev.target.value });
     }
 
+    sendLoginedUserToErrandsListPage(){
+        axios.get("/isAuthenticated").then((res)=>{
+            if(res.status==200){
+                this.props.history.push("/errands-list")
+            }
+        })
+    }
+
     sendLoginRequest(emailInput, passwordInput) {
         if (!emailInput) {
             alert("Put your email.");
@@ -35,6 +43,10 @@ export class LoginPage extends React.Component {
     handleKeyPress(target){
         if(target.charCode==13)
             this.sendLoginRequest(this.state.emailInput, this.state.passwordInput);
+    }
+
+    componentDidMount(){
+        this.sendLoginedUserToErrandsListPage();
     }
 
     render() {
