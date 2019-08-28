@@ -13,10 +13,17 @@ export class LoginPage extends React.Component {
     }
 
     sendLoginedUserToErrandsListPage(){
-        axios.get("/isAuthenticated").then((res)=>{
+        axios.get("/isUnauthenticated").then((res)=>{
             if(res.status==200){
-                this.props.history.push("/errands-list")
+                console.log("Welcome!")
             }
+            //is it correct to send 404..?
+            if(res.status==404){
+                this.props.history.push("/errands-list");
+            }
+        })
+        .catch((err)=>{
+            this.props.history.push("/errands-list");
         })
     }
 
@@ -51,8 +58,7 @@ export class LoginPage extends React.Component {
 
     render() {
         let { emailInput, passwordInput } = this.state;
-        return (
-            <Container style={{height:"100%", margin:"0%"}} fluid>
+        return <Container style={{height:"100%", margin:"0%"}} fluid>
                 <Row className = "align-items-center" style={{height:"100%"}}>
                     <Col className="d-none d-sm-block" sm="6" style={{height:"100%", padding:"0%"}}>
                         <Media style={{ maxWidth: "100%", position:"absolute",top:"50%",left:"50%",
@@ -81,6 +87,5 @@ export class LoginPage extends React.Component {
                     </Col>
                 </Row>
             </Container>
-        )
     }
 }

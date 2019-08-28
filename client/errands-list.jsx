@@ -42,7 +42,7 @@ export class ErrandsListPage extends React.Component {
     }
 
     logout() {
-        axios.get("/logout").then(res => console.log("Logout")).catch(err => console.log(err));
+        axios.get("/logout").then((res)=>this.props.history.push("/")).catch(err => console.log(err));
     }
 
     render() {
@@ -64,9 +64,7 @@ export class ErrandsListPage extends React.Component {
                 </Col>
                 <Col sm="2" style={{ padding:0}}>
                 <Button style={{ width: "100%", height:"100%" }} outline color="primary" onClick={() => {
-                        localStorage.clear();
                         this.logout();
-                        this.props.history.push("/");
                     }}>Logout</Button>
                  </Col>
             </Row>

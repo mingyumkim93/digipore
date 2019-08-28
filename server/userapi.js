@@ -99,9 +99,10 @@ module.exports = function (app, db, passport, LocalStrategy, bcrypt) {
     });
 
     app.get("/logout", (req, res) => {
-        if (req.session)
-            req.session.destroy(err => console.log(err));
-        
+        if (req.session){
+            req.logout();
+            res.send(200);
+        }
     })
 
     app.get("/isAuthenticated", (req,res)=>{
@@ -119,6 +120,13 @@ module.exports = function (app, db, passport, LocalStrategy, bcrypt) {
             res.status(401).send("Not found")
             console.log("not auth")
         }
-
     });
+    app.get("/isUnauthenticated", (req,res)=>{
+        if(req.isUnauthenticated()){
+            res.send(200);
+        }
+        else{
+            res.send(404);
+        }
+    })
 }
