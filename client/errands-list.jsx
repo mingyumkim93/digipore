@@ -50,7 +50,7 @@ export class ErrandsListPage extends React.Component {
         let filtered = errands.filter(errand => errand.title.toLowerCase().includes(filter.toLowerCase()));
         let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentUserEmail={currentUser.email} role={currentUser.role} />)
 
-        return <Container>
+        return <Container fluid>
             <h4>Errand List</h4>
             <Row>
                 <Col sm="6" style={{ padding:0}}>
