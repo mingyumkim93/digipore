@@ -23,12 +23,14 @@ let db = require("./mysqlhelper");
 let errandApi = require("./errandapi");
 let userApi = require('./userapi');
 let reviewApi = require('./reviewapi');
-let offerApi = require("./offerapi")
+let offerApi = require("./offerapi");
+let mypassport = require("./passport");
 
 errandApi(app, db);
-userApi(app, db, passport, LocalStrategy, bcrypt);
+userApi(app, db, bcrypt);
 reviewApi(app, db);
-offerApi(app, db)
+offerApi(app, db);
+mypassport(app, db, passport, LocalStrategy, bcrypt);
 
 app.listen(9000);
 
