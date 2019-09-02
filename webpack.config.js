@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: './client/app.jsx',
   mode: 'development',
-  output: { path: __dirname+'/wwwroot/app', filename: 'app.bundle.js' },
+  output: { path: __dirname+'/wwwroot/app', filename: 'app.bundle.js', publicPath:'' },
   module: {
     rules: [
       {
@@ -22,6 +22,5 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
-  },
-  
+  }
 };
