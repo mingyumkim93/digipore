@@ -54,7 +54,7 @@ module.exports = function (app, db, bcrypt) {
     app.get("/logout", (req, res) => {
         if (req.session){
             req.logout();
-            res.send(200);
+            res.sendStatus(200);
         }
     })
 
@@ -76,10 +76,10 @@ module.exports = function (app, db, bcrypt) {
     });
     app.get("/isUnauthenticated", (req,res)=>{
         if(req.isUnauthenticated()){
-            res.send(200);
+            res.sendStatus(200);
         }
         else{
-            res.send(404);
+            res.sendStatus(404);
         }
     })
 }

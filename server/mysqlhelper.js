@@ -17,7 +17,7 @@ let options={
     host: 'localhost',
     port: 3306,
     user     : "dbuser",
-    password : "test123",
+    password : "Daylight12!",
     database : 'crm'
 }
 
