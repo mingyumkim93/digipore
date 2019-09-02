@@ -35,6 +35,7 @@ export class ErrandsListPage extends React.Component {
     componentDidMount() {
         this.checkAuth();
         this.getErrandsFromDB();
+        console.log("test1")
     }
 
     filterChanged(e) {
