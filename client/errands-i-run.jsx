@@ -54,7 +54,7 @@ const finalizeErrand = (errand) => {
 export const ErrandsIRun = ({ errand, updateMyErrandsList }) => <tr>
     <td>{errand.title}</td>
     <td>{errand.explanation}</td>
-    <td>{errand.fee}</td>
+    <td>{errand.fee}€</td>
     {errand.state == 0 && <td>Waiting for acceptance</td>}
     {errand.state == 10 && <td>You are running it
     <Button outline color = "primary"  onClick={() => {
@@ -71,8 +71,8 @@ export const ErrandsIRun = ({ errand, updateMyErrandsList }) => <tr>
                 changeErrandToNotAccepted(errand);
                 updateMyErrandsList(true);
              }
-        }}>Cancel this errand</Button></td>}
-    {errand.state == 20 && <td>Poster Confirmed. Please Confirm.
+        }}>Terminate</Button></td>}
+    {errand.state == 20 && <td>Poster approved. Please Confirm.
     <Button outline color = "primary"  onClick={() => {
             let doubleCheck = confirm("Do you really want to finalize this errand?")
             if (doubleCheck) {
@@ -81,7 +81,7 @@ export const ErrandsIRun = ({ errand, updateMyErrandsList }) => <tr>
                 updateMyErrandsList(true);
             }
         }}>Confirm</Button></td>}
-    {errand.state == 30 && <td>You confirmed. Waiting for poster confirm..</td>}
+    {errand.state == 30 && <td>You confirmed. Waiting for poster to approve...</td>}
     {errand.state == 40 && <td>Done</td>}
     <td><Link to={`user/${errand.poster}`}>{errand.poster}</Link></td>
     <td>{errand.requestedDayAndTime}</td>

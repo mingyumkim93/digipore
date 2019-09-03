@@ -31,14 +31,14 @@ export class Offer extends React.Component {
         return <tr>
             <td><NavLink to={`/user/${offer.sender}`}>{offer.sender}</NavLink></td>
             <td>{offer.message}</td>
-            <td>{offer.fee}</td>
+            <td>{offer.fee}€</td>
             <td>{offer.date}</td>
             <td><Button outline color="primary" onClick={() => {
                 let doubleCheck = confirm("Do you really want to accept this offer?");
                 if (doubleCheck) {
                     this.acceptOffer(errand, offer)
                 }
-            }}>ACCEPT</Button></td>
+            }}>Accept</Button></td>
         </tr>
     }
 

@@ -50,8 +50,10 @@ export class ErrandsListPage extends React.Component {
         let filtered = errands.filter(errand => errand.title.toLowerCase().includes(filter.toLowerCase()));
         let rows = filtered.map(errand => <Errands errand={errand} key={errand.id} currentUserEmail={currentUser.email} role={currentUser.role} />)
 
-        return <Container fluid>
+        return <div>
             <h4>Errand List</h4>
+            <Container fluid>
+            
             <Row>
                 <Col sm="6" style={{ padding:0}}>
                     <Input style = {{height:"100%" }} type="text" id="filter" placeholder="Add keyword to filter errands based on title" onChange={e => this.filterChanged(e)} />
@@ -78,7 +80,7 @@ export class ErrandsListPage extends React.Component {
                                 <td>Location</td>
                                 <td>State</td>
                                 <td>Date</td>
-                                <td>Fee</td>
+                                <td>Pay</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
@@ -94,6 +96,8 @@ export class ErrandsListPage extends React.Component {
             </Row>
 
         </Container>
+        </div>
+        
 
     }
 }

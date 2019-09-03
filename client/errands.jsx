@@ -13,7 +13,7 @@ export const Errands = function({errand, currentUserEmail, role}) {
             {errand.state == 30 && <td>In progress</td>}
             {errand.state == 40 && <td>Done</td>}
             <td>{errand.requestedDayAndTime}</td>
-            <td>{errand.fee}</td>
+            <td>{errand.fee}€</td>
             <td><Link to={`my-errand/${errand.id}`}>Modify</Link></td>
             <td><Link to={`errand/${errand.id}`}>Details</Link></td>
     </tr>
@@ -25,7 +25,7 @@ export const Errands = function({errand, currentUserEmail, role}) {
             {errand.state == 0 && <td>Waiting for acceptance</td>}
             {errand.state !== 0 && <td>In progress</td>}
             <td>{errand.requestedDayAndTime}</td>
-            <td>{errand.fee}</td>
+            <td>{errand.fee}€</td>
             {currentUserEmail == errand.poster &&
                 <td><Link to={`my-errand/${errand.id}`}>Modify</Link></td>}
             {currentUserEmail !== errand.poster &&

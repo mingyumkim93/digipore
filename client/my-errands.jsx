@@ -67,7 +67,7 @@ export class MyErrandsListPage extends React.Component {
                         <tr>
                             <td>Title</td>
                             <td>Explanation</td>
-                            <td>Fee</td>
+                            <td>Pay</td>
                             <td>State</td>
                             <td>Runner</td>
                             <td>Posted</td>
@@ -88,7 +88,7 @@ export class MyErrandsListPage extends React.Component {
                         <tr>
                             <td>Title</td>
                             <td>Explanation</td>
-                            <td>Fee</td>
+                            <td>Pay</td>
                             <td>State</td>
                             <td>Poster</td>
                             <td>Posted</td>

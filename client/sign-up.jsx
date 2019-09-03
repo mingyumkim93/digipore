@@ -62,8 +62,8 @@ export class SignUpPage extends React.Component {
     }
 
     render() {
-        return <Container fluid>
-            <Row className = "align-items-center">
+        return <Container style={{height:"100%", margin:"0%"}} fluid>
+            <Row className = "align-items-center" style={{height:"100%"}}>
                 <Col className="d-none d-sm-block" sm="6">
                     <Media style={{ maxWidth: "100%", position:"absolute",top:"50%",left:"50%",
                                 transform:"translateX(-50%) translateY(-50%)"}} src="signup.jpg" alt="Generic placeholder image" />

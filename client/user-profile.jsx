@@ -46,7 +46,7 @@ export class UserProfilePage extends React.Component{
         </ListGroupItem>)
 
         return <ListGroup>
-            <h3>User Info</h3>
+            <h4>User Info</h4>
             <ListGroupItem style={{padding:0}}>
                 <ListGroupItemHeading>Name</ListGroupItemHeading>
                 <ListGroupItemText>{user.firstName} {user.lastName}</ListGroupItemText>

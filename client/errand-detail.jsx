@@ -80,9 +80,9 @@ export class ErrandDetailPage extends React.Component {
                       </ListGroupItemText>
                 </ListGroupItem>
                 <ListGroupItem style={{padding:0, marginBottom:"2%"}}>
-                        <ListGroupItemHeading>Fee</ListGroupItemHeading>
+                        <ListGroupItemHeading>Offering to pay</ListGroupItemHeading>
                         <ListGroupItemText>
-                          {errand.fee}
+                          {errand.fee}€
                         </ListGroupItemText>
                 </ListGroupItem>
             {errand.state == 0 &&

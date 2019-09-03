@@ -23,10 +23,10 @@ export class ErrandsIPosted extends React.Component{
             .catch(err => console.log(err));
     }
     
-    posterConfirm  (errand)  {
+    posterApproves (errand)  {
         errand.state = 20;
         axios.put(`/api/errands/${errand.id}`, errand).then((res) => {
-            console.log("You Confirmed.");
+            console.log("You approved.");
         })
             .catch(err => window.alert(err));
     }
@@ -82,26 +82,26 @@ export class ErrandsIPosted extends React.Component{
         return<tr>
         <td>{errand.title}</td>
         <td>{errand.explanation}</td>
-        <td>{errand.fee}</td>
-        {errand.state == 0 && <td><Link  to={`/see-offers/${errand.id}`}>See offer ({stateZeroOffers.length})</Link></td>}
+        <td>{errand.fee}€</td>
+        {errand.state == 0 && <td><Link  to={`/see-offers/${errand.id}`}>See offers ({stateZeroOffers.length})</Link></td>}
         {errand.state == 10 && <td>In progress
         <Button outline color = "primary" onClick={() => {
                 let doubleCheck = confirm("Do you really want to finalize this errand?")
                 if (doubleCheck) {
-                    this.posterConfirm(errand);
+                    this.posterApproves(errand);
                     this.leaveReviewToRunner(errand);
                     this.props.updateMyErrandsList(true);
                 }
-            }}>Confirm</Button>
+            }}>Approve</Button>
             <Button outline color = "primary"  onClick={() => {
                 let doubleCheck = confirm("Do you really want to cancel this errand?")
                 if (doubleCheck) { 
                     this.changeErrandToNotAccepted(errand); 
                     this.props.updateMyErrandsList(true);
                 }
-            }}>Cancel this runner</Button></td>}
-        {errand.state == 20 && <td>You Confirmed. Waiting for runner confirm..</td>}
-        {errand.state == 30 && <td>Runner Confirmed. Please Confirm.
+            }}>Terminate</Button></td>}
+        {errand.state == 20 && <td>You approved. Waiting for runner to confirm...</td>}
+        {errand.state == 30 && <td>Runner confirmed. Please approve.
         <Button outline color = "primary"  onClick={() => {
                 let doubleCheck = confirm("Do you really want to finalize this errand?")
                 if (doubleCheck) {
@@ -109,7 +109,7 @@ export class ErrandsIPosted extends React.Component{
                     this.leaveReviewToRunner(errand);
                     this.props.updateMyErrandsList(true);
                 }
-            }}>Confirm</Button></td>}
+            }}>Approve</Button></td>}
         {errand.state == 40 && <td>Done</td>}
         <td>{errand.runner == "" && "-"}<Link to={`user/${errand.runner}`}>{errand.runner}</Link></td>
         <td>{errand.requestedDayAndTime}</td>

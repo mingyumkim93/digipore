@@ -100,7 +100,7 @@ export class ModifyMyErrandPage extends React.Component {
                 <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="textarea" id="newExplanation" value={newExplanation} />
                 <Label>Location</Label>
                 <Input style={{marginBottom:"2%"}}  onChange={ev => this.textChanged(ev)} type="text" id="newLocation" value={newLocation} />
-                <Label>Fee</Label>
+                <Label>Offering to pay</Label>
                 <Input style={{marginBottom:"2%"}} onChange={ev => this.textChanged(ev)} type="number" id="newFee" placeholder={`${errand.fee}€`} />
                 <Button style={{width:"33.3%"}} outline color = "primary" onClick={() => {
                      let doubleCheck = confirm("Do you really want to modify this errand?");

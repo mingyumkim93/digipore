@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Offer } from './offers';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 export class SeeOfferPage extends React.Component {
 
     constructor(props) {
@@ -65,7 +65,12 @@ export class SeeOfferPage extends React.Component {
         if (offers.length == 0) return <h1>There are no offers</h1>
         if (errand.poster == currentUser.email) {
             return <div>
-                <h4>See Offer</h4>
+                <h4>Offers to run your errand</h4>
+                <ListGroup style={{marginBottom:"2%"}}>
+                    <ListGroupItem style={{padding:0, border:0}}><b>Title : </b>{errand.title}</ListGroupItem>
+                    <ListGroupItem style={{padding:0, border:0}}><b>Explanation : </b> {errand.explanation}</ListGroupItem>
+                    <ListGroupItem style={{padding:0, border:0}}><b>Offering to pay : </b> {errand.fee}€</ListGroupItem>
+                </ListGroup>
                 <Table responsive={true}>
                 <thead>
                     <tr>
