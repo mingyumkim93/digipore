@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "local-storage": "^2.0.0",
+    "node": "^12.10.0",
     "npx": "^10.2.0",
     "popper.js": "^1.15.0",
     "postcss-loader": "^3.0.0",
